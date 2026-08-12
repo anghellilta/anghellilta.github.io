@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angel's Portfolio — Full-Stack Developer & Designer</title>
+  <meta name="description" content="Welcome to Angel's creative portfolio. Full-Stack Developer, UI/UX Designer, and Project Manager showcasing web apps, digital art, and traditional art.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Clean Preloader Loading State -->
+  <div class="site-loader" id="siteLoader">
+    <div class="loader-content">
+      <img src="logo.png" alt="Angel Portfolio" class="loader-logo">
+      <div class="loader-bar-bg">
+        <div class="loader-bar-fill" id="loaderBarFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+  <!-- Page Transition Overlay -->
+  <div class="page-transition active" id="pageTransition"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="logo.png" alt="Anghellita Logo">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="webapps.html">Website &amp; App</a></li>
+      <li><a href="digitalart.html">Digital Art</a></li>
+      <li><a href="tradart.html">Traditional Art</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- Hero Section (herosectionbg.png background + 10.png Wiggle Artwork - BIGGER) -->
+  <section class="hero-bg-section">
+    <div class="hero-center-wrapper">
+      <img src="asset/10.png" alt="Angel Portfolio" class="hero-center-img" loading="eager">
+    </div>
+  </section>
+
+  <!-- Profile & Credentials Section (Framed Layout with Landscape Tech Banner) -->
+  <section class="specialist-section" id="specialistSection">
+    <div class="figma-specialist-container">
+      <div class="figma-layout-grid">
+
+        <!-- Left Column: Education (Moved Upwards to Frame TECH SPECIALIST.png top left) -->
+        <div class="figma-left-col">
+          <div class="figma-edu-block">
+            <div class="figma-header-wrap">
+              <h3 class="figma-header-title">Education</h3>
+              <div class="figma-vector-line right">
+                <span class="figma-dot"></span>
+                <span class="figma-line"></span>
+              </div>
+            </div>
+            <div class="figma-edu-list">
+              <div class="figma-edu-item">
+                <div class="figma-edu-years">
+                  <span>2020</span>
+                  <span>2022</span>
+                </div>
+                <div class="figma-edu-content">
+                  <div class="figma-edu-school">Marcelo H. Del Pilar<br>National High School</div>
+                  <div class="figma-edu-strand">Science, Technology,<br>Engineering, &amp; Mathematics strand</div>
+                  <div class="figma-edu-honors">With Honors</div>
+                </div>
+              </div>
+              <div class="figma-edu-item">
+                <div class="figma-edu-years">
+                  <span>2022</span>
+                  <span>2026</span>
+                </div>
+                <div class="figma-edu-content">
+                  <div class="figma-edu-school">Systems Technology<br>Institute (Malolos)</div>
+                  <div class="figma-edu-strand">Bachelor of Science in<br>Information Technology</div>
+                  <div class="figma-edu-honors">Cum Laude</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Column: Tech Specialist Artwork + Landscape Languages & Frameworks Banner -->
+        <div class="figma-center-col">
+          <img src="asset/TECH SPECIALIST.png" alt="Tech Specialist — Angel" class="tech-specialist-2" loading="lazy">
+
+          <!-- Languages & Frameworks Block (Landscape Banner Format) -->
+          <div class="figma-lang-block center-lang-block">
+            <div class="figma-header-wrap center-header-wrap">
+              <h3 class="figma-header-title">Languages &amp; Frameworks</h3>
+              <div class="figma-vector-line center-line">
+                <span class="figma-dot"></span>
+                <span class="figma-line"></span>
+                <span class="figma-dot"></span>
+              </div>
+            </div>
+            <div class="figma-lang-grid center-lang-grid">
+              <div>TypeScript</div>
+              <div>CSS</div>
+              <div>JavaScript</div>
+              <div>Python</div>
+              <div>Java</div>
+              <div>C#</div>
+              <div>SQL</div>
+              <div>Dart</div>
+              <div>Swift &amp; Kotlin</div>
+              <div>React</div>
+              <div>Next.js 14</div>
+              <div>Flutter</div>
+              <div>Tailwind CSS</div>
+              <div>Supabase</div>
+              <div>Firebase</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Toolkit Image (Moved Upwards to Frame TECH SPECIALIST.png top right) -->
+        <div class="figma-right-col">
+          <div class="figma-toolkit-wrap">
+            <div class="figma-header-wrap" style="text-align: right;">
+              <h3 class="figma-header-title">Toolkit</h3>
+              <div class="figma-vector-line left">
+                <span class="figma-line"></span>
+                <span class="figma-dot"></span>
+              </div>
+            </div>
+            <img src="asset/Group 14.png" alt="Toolkit — Development & Design Software" class="figma-toolkit-img" loading="lazy">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Category Grid Section -->
+  <section class="explore-section">
+    <div class="container">
+      <h2 class="explore-heading">Explore My <span>Creative Work</span></h2>
+      <div class="explore-grid">
+
+        <!-- Website & App Card -->
+        <a href="webapps.html" class="explore-card">
+          <div class="explore-card-bg">
+            <img src="website&app/Frame 3.png" alt="Website & App Teaser 1" loading="lazy">
+            <img src="website&app/Frame 4.png" alt="Website & App Teaser 2" loading="lazy">
+          </div>
+          <div class="explore-card-overlay">
+            <img src="website&app.png" alt="Website & App" class="explore-card-title">
+            <span class="explore-card-count">7 Case Studies</span>
+          </div>
+          <div class="explore-card-arrow">→</div>
+        </a>
+
+        <!-- Digital Art Card -->
+        <a href="digitalart.html" class="explore-card">
+          <div class="explore-card-bg">
+            <img src="digitalart/FACTOR, ANGEL E. (Infographic).png" alt="Digital Art Teaser 1" loading="lazy">
+            <img src="digitalart/751870302_1735036920959253_785918651566794023_n (1).jpg" alt="Digital Art Teaser 2" loading="lazy">
+          </div>
+          <div class="explore-card-overlay">
+            <img src="digitalart.png" alt="Digital Art" class="explore-card-title">
+            <span class="explore-card-count">16 Artworks</span>
+          </div>
+          <div class="explore-card-arrow">→</div>
+        </a>
+
+        <!-- Traditional Art Card -->
+        <a href="tradart.html" class="explore-card">
+          <div class="explore-card-bg">
+            <img src="tradart/751764513_1441959014374667_4327550968881304167_n.jpg" alt="Traditional Art Teaser 1" loading="lazy">
+            <img src="tradart/751914509_1831805608200136_105801705969479557_n.jpg" alt="Traditional Art Teaser 2" loading="lazy">
+          </div>
+          <div class="explore-card-overlay">
+            <img src="traditionalart.png" alt="Traditional Art" class="explore-card-title">
+            <span class="explore-card-count">18 Artworks</span>
+          </div>
+          <div class="explore-card-arrow">→</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="footer-image-wrapper">
+      <img src="asset/8.png" alt="Angel Portfolio Footer" class="footer-wiggle-img" loading="lazy">
+    </div>
+    <div class="footer-contact">
+      <h2 class="footer-contact-title">Let's Connect</h2>
+      <a href="mailto:angel.e.factor@gmail.com" class="footer-email-link">angel.e.factor@gmail.com</a>
+      <div class="footer-socials">
+        <a href="mailto:angel.e.factor@gmail.com" class="footer-social-link" aria-label="Email" title="Email: angel.e.factor@gmail.com">✉</a>
+        <a href="https://www.instagram.com/nglfctr/" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram" title="Instagram: @nglfctr">📷</a>
+        <a href="https://www.linkedin.com/in/angelfactor" target="_blank" rel="noopener" class="footer-social-link" aria-label="LinkedIn" title="LinkedIn: Angel Factor">in</a>
+      </div>
+      <p class="footer-copyright">&copy; 2026 <a href="index.html">Angel</a>. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Interactive Pop-up Modal Card for Credentials & Skills -->
+  <div class="info-popup-modal" id="infoPopupModal">
+    <div class="info-popup-card">
+      <button class="info-popup-close" id="infoPopupClose" aria-label="Close modal">&times;</button>
+      <span class="info-popup-badge" id="infoPopupBadge">Credentials</span>
+      <h3 class="info-popup-title" id="infoPopupTitle">Item Details</h3>
+      <div class="info-popup-subtitle" id="infoPopupSubtitle">Subtitle</div>
+      <div class="info-popup-body" id="infoPopupBody">Detailed information content...</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
