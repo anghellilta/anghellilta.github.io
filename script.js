@@ -244,6 +244,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ===== 3D FLIPPABLE FOOTER CARD SYSTEM =====
+  const footerFlipCard = document.getElementById('footerFlipCard');
+  if (footerFlipCard) {
+    footerFlipCard.addEventListener('click', (e) => {
+      // Allow social links inside card back to be clicked directly without toggling flip
+      if (e.target.closest('.contact-card-link')) return;
+      footerFlipCard.classList.toggle('flipped');
+    });
+  }
+
   // ===== LIGHTBOX SYSTEM =====
   const lightbox = document.getElementById('lightbox');
   if (!lightbox) return; // No lightbox on pages without galleries

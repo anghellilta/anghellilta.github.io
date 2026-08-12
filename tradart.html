@@ -131,11 +131,41 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer with Flippable 3D Contact Card -->
   <footer class="footer" id="contact">
     <div class="footer-image-wrapper">
-      <img src="asset/8.png" alt="Angel Portfolio Footer" class="footer-wiggle-img" loading="lazy">
+      <div class="footer-flip-card" id="footerFlipCard" title="Click or hover to flip contact card">
+        <div class="footer-flip-card-inner">
+          
+          <!-- Front Face: asset/8.png -->
+          <div class="footer-card-front">
+            <span class="contact-card-hint">🔄 Hover/Click to Flip Card</span>
+            <img src="asset/8.png" alt="Angel Portfolio Artwork" class="footer-card-img" loading="lazy">
+          </div>
+          
+          <!-- Back Face: asset/contact.png + Real Clickable Links -->
+          <div class="footer-card-back">
+            <span class="contact-card-hint">✨ Contact Card</span>
+            <img src="asset/contact.png" alt="Angel Contact Card — angel.e.factor@gmail.com" class="footer-card-img" loading="lazy">
+            
+            <!-- Real Interactive Clickable Social Badges -->
+            <div class="contact-card-overlay">
+              <a href="mailto:angel.e.factor@gmail.com" class="contact-card-link" title="Send Email: angel.e.factor@gmail.com">
+                <span>✉</span> Email
+              </a>
+              <a href="https://www.instagram.com/nglfctr/" target="_blank" rel="noopener" class="contact-card-link" title="Instagram: @nglfctr">
+                <span>📷</span> Instagram
+              </a>
+              <a href="https://www.linkedin.com/in/angelfactor" target="_blank" rel="noopener" class="contact-card-link" title="LinkedIn: Angel Factor">
+                <span>in</span> LinkedIn
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
+
     <div class="footer-contact">
       <h2 class="footer-contact-title">Let's Connect</h2>
       <a href="mailto:angel.e.factor@gmail.com" class="footer-email-link">angel.e.factor@gmail.com</a>

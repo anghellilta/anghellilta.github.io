@@ -89,9 +89,9 @@ ul {
   list-style: none;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar (Dark Red) */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -99,12 +99,13 @@ ul {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--bg-card-hover);
-  border-radius: 4px;
+  background: linear-gradient(180deg, #660000, #b50707, #8b0000);
+  border-radius: 5px;
+  border: 2px solid var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
+  background: linear-gradient(180deg, #b50707, #e74c3c, #b50707);
 }
 
 /* ===== SCROLL PROGRESS BAR (BLOOD RED) ===== */
@@ -1321,19 +1322,121 @@ ul {
   align-items: center;
   background: var(--bg-primary);
   overflow: hidden;
+  perspective: 1200px;
 }
 
-.footer-wiggle-img {
+/* 3D Flip Card Container */
+.footer-flip-card {
   max-width: 850px;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  perspective: 1200px;
+}
+
+.footer-flip-card-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+}
+
+/* Flip on hover or when flipped class added */
+.footer-flip-card:hover .footer-flip-card-inner,
+.footer-flip-card.flipped .footer-flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.footer-card-front,
+.footer-card-back {
+  width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.footer-card-front {
+  z-index: 2;
+}
+
+.footer-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+.footer-card-img {
   width: 100%;
   height: auto;
   display: block;
+  filter: drop-shadow(0 15px 35px rgba(0,0,0,0.6));
+}
+
+.footer-card-front .footer-card-img {
   animation: wiggle 3.5s ease-in-out infinite;
   transform-origin: center center;
 }
 
-.footer-wiggle-img:hover {
-  animation: wiggleHover 0.6s ease-in-out infinite alternate;
+/* Overlay clickable social links on contact.png card back */
+.contact-card-overlay {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(231, 76, 60, 0.4);
+  z-index: 10;
+}
+
+.contact-card-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+}
+
+.contact-card-link:hover {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary-light);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+}
+
+.contact-card-hint {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.65);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+  pointer-events: none;
 }
 
 @keyframes wiggle {
