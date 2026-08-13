@@ -1431,11 +1431,11 @@ ul {
   transform-origin: center center;
 }
 
-/* Overlay Download CV button directly below "Work with me!" text on contact.png — Shifted slightly right */
+/* Overlay Download CV button directly below "Work with me!" text on contact.png — Shifted slightly left */
 .contact-card-overlay {
   position: absolute;
   top: 61%;
-  left: 68%;
+  left: 64%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
