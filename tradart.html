@@ -170,8 +170,13 @@
     </div>
   </footer>
 
-  <!-- Lightbox -->
+  <!-- Lightbox with Interactive Zoom Controls -->
   <div class="lightbox" id="lightbox">
+    <div class="lightbox-zoom-controls">
+      <button class="lightbox-zoom-btn" id="lightboxZoomIn" title="Zoom In">+</button>
+      <button class="lightbox-zoom-btn" id="lightboxZoomOut" title="Zoom Out">−</button>
+      <button class="lightbox-zoom-btn" id="lightboxZoomReset" title="Reset Zoom">↺</button>
+    </div>
     <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
     <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">‹</button>
     <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">›</button>
@@ -179,7 +184,7 @@
       <img class="lightbox-img" id="lightboxImg" src="" alt="Full-size image">
     </div>
     <span class="lightbox-counter" id="lightboxCounter"></span>
-    <span class="lightbox-scroll-hint" id="lightboxScrollHint" style="display:none;">↕ Scroll to see full image</span>
+    <span class="lightbox-scroll-hint" id="lightboxScrollHint" style="display:none;">🔍 Click or Pinch to Zoom</span>
   </div>
 
   <script src="script.js"></script>

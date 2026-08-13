@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ===== LIGHTBOX SYSTEM =====
+  // ===== LIGHTBOX SYSTEM WITH INTERACTIVE ZOOM =====
   const lightbox = document.getElementById('lightbox');
   if (!lightbox) return; // No lightbox on pages without galleries
 
@@ -276,6 +276,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxNext = document.getElementById('lightboxNext');
   const lightboxCounter = document.getElementById('lightboxCounter');
   const lightboxScrollHint = document.getElementById('lightboxScrollHint');
+  const lightboxZoomIn = document.getElementById('lightboxZoomIn');
+  const lightboxZoomOut = document.getElementById('lightboxZoomOut');
+  const lightboxZoomReset = document.getElementById('lightboxZoomReset');
 
   const galleryImages = [];
   document.querySelectorAll('.gallery-item img').forEach(img => {
@@ -283,42 +286,99 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   let currentIndex = 0;
+  let zoomScale = 1;
+
+  function applyZoom() {
+    if (!lightboxImg) return;
+    lightboxImg.style.transform = `scale(${zoomScale})`;
+    if (zoomScale > 1) {
+      lightboxImg.classList.add('is-zoomed');
+    } else {
+      lightboxImg.classList.remove('is-zoomed');
+    }
+  }
+
+  function setZoom(scale) {
+    zoomScale = Math.min(Math.max(scale, 1), 3.5);
+    applyZoom();
+  }
+
+  function resetZoom() {
+    zoomScale = 1;
+    applyZoom();
+  }
+
+  if (lightboxZoomIn) {
+    lightboxZoomIn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setZoom(zoomScale + 0.5);
+    });
+  }
+
+  if (lightboxZoomOut) {
+    lightboxZoomOut.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setZoom(zoomScale - 0.5);
+    });
+  }
+
+  if (lightboxZoomReset) {
+    lightboxZoomReset.addEventListener('click', (e) => {
+      e.stopPropagation();
+      resetZoom();
+    });
+  }
+
+  if (lightboxImg) {
+    lightboxImg.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (zoomScale > 1) {
+        resetZoom();
+      } else {
+        setZoom(2.2);
+      }
+    });
+
+    lightboxImg.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (e.deltaY < 0) {
+        setZoom(zoomScale + 0.25);
+      } else {
+        setZoom(zoomScale - 0.25);
+      }
+    }, { passive: false });
+  }
 
   function openLightbox(index) {
     currentIndex = index;
+    resetZoom();
     updateLightboxImage();
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
   function closeLightbox() {
+    resetZoom();
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
   }
 
   function updateLightboxImage() {
+    resetZoom();
     const src = galleryImages[currentIndex];
     lightboxImg.src = src;
     lightboxCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
 
     lightboxContent.classList.remove('scrollable');
     lightboxContent.scrollTop = 0;
-    if (lightboxScrollHint) lightboxScrollHint.style.display = 'none';
+    if (lightboxScrollHint) lightboxScrollHint.style.display = 'block';
 
     lightboxImg.onload = () => {
       const ratio = lightboxImg.naturalHeight / lightboxImg.naturalWidth;
       if (ratio > 1.5) {
         lightboxContent.classList.add('scrollable');
-        if (lightboxScrollHint) lightboxScrollHint.style.display = 'block';
-      } else {
-        lightboxContent.classList.remove('scrollable');
-        if (lightboxScrollHint) lightboxScrollHint.style.display = 'none';
       }
     };
-
-    lightboxImg.style.animation = 'none';
-    lightboxImg.offsetHeight;
-    lightboxImg.style.animation = 'lightboxZoomIn 0.35s ease-out';
   }
 
   function prevImage() {

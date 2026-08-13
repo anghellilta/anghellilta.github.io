@@ -1289,6 +1289,57 @@ ul {
   z-index: 2002;
 }
 
+/* Lightbox Zoom Controls & Interactive Image Zoom */
+.lightbox-zoom-controls {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  display: flex;
+  gap: 8px;
+  z-index: 2005;
+}
+
+.lightbox-zoom-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  touch-action: manipulation;
+}
+
+.lightbox-zoom-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary-light);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: zoom-in;
+  user-select: none;
+}
+
+.lightbox-img.is-zoomed {
+  cursor: zoom-out;
+}
+
 /* Scroll hint for tall images */
 .lightbox-scroll-hint {
   position: fixed;
@@ -1296,7 +1347,7 @@ ul {
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.5px;
   z-index: 2002;
   animation: pulseHint 2s ease-in-out infinite;
@@ -1380,11 +1431,11 @@ ul {
   transform-origin: center center;
 }
 
-/* Overlay Download CV button directly below "Work with me!" text on contact.png */
+/* Overlay Download CV button directly below "Work with me!" text on contact.png — Shifted slightly right */
 .contact-card-overlay {
   position: absolute;
   top: 61%;
-  left: 62%;
+  left: 68%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
