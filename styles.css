@@ -643,20 +643,17 @@ ul {
   margin-top: 6px;
 }
 
-/* WIDE LANDSCAPE Languages & Frameworks Banner under TECH SPECIALIST.png — Moved UPWARDS */
-.figma-lang-block.center-lang-block {
-  margin-top: -24px; /* Moved UPWARDS directly under TECH SPECIALIST.png */
+/* WIDE LANDSCAPE Languages & Frameworks Banner under TECH SPECIALIST.png — Shifted higher underneath artwork */
+.figma-lang-block.center-lang-block,
+.center-lang-block {
+  margin-top: -38px;
+  margin-bottom: 0;
   margin-left: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-}
-
-.center-lang-block {
-  margin-top: -15px;
-  margin-bottom: 24px;
   position: relative;
   z-index: 5;
 }
