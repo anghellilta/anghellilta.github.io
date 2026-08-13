@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/webapps", "dest": "/webapps.html" },
+    { "src": "/digitalart", "dest": "/digitalart.html" },
+    { "src": "/tradart", "dest": "/tradart.html" }
+  ]
+}
