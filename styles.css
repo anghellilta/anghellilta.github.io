@@ -638,6 +638,13 @@ ul {
   text-align: center;
 }
 
+.center-lang-block {
+  margin-top: -15px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 5;
+}
+
 .center-header-wrap {
   display: flex;
   flex-direction: column;
