@@ -1380,16 +1380,15 @@ ul {
   transform-origin: center center;
 }
 
-/* Overlay Download CV button on right side of contact.png */
+/* Overlay Download CV button directly below "Work with me!" text on contact.png */
 .contact-card-overlay {
   position: absolute;
-  top: 56%;
-  right: 12%;
-  left: auto;
-  transform: none;
+  top: 61%;
+  left: 62%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   z-index: 10;
   width: auto;
 }
