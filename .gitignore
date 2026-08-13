@@ -3,3 +3,5 @@ node_modules/
 .tempmediaStorage/
 .DS_Store
 Thumbs.db
+
+.vercel

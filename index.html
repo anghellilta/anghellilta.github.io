@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Angel's Portfolio — Full-Stack Developer & Designer</title>
-  <meta name="description" content="Welcome to Angel's creative portfolio. Full-Stack Developer, UI/UX Designer, and Project Manager showcasing web apps, digital art, and traditional art.">
+  <title>Anghellita — Full-Stack Developer &amp; Designer</title>
+  <meta name="description"
+    content="Welcome to Anghellita's creative portfolio. Full-Stack Developer, UI/UX Designer, and Project Manager showcasing web apps, digital art, and traditional art.">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
   <!-- Clean Preloader Loading State -->
   <div class="site-loader" id="siteLoader">
     <div class="loader-content">
-      <img src="logo.png" alt="Angel Portfolio" class="loader-logo">
+      <img src="logo.png" alt="Anghellita Portfolio" class="loader-logo">
       <div class="loader-bar-bg">
         <div class="loader-bar-fill" id="loaderBarFill"></div>
       </div>
@@ -50,94 +53,162 @@
     </div>
   </section>
 
+  <!-- Infinite Marquee Banner (After Hero Section) -->
+  <div class="marquee-banner" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+      </div>
+      <div class="marquee-content">
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+        <span>ABOUT THE ARTIST</span><span class="marquee-dot">•</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Profile & Credentials Section (Framed Layout with Landscape Tech Banner) -->
   <section class="specialist-section" id="specialistSection">
     <div class="figma-specialist-container">
       <div class="figma-layout-grid">
 
-        <!-- Left Column: Education (Moved Upwards to Frame TECH SPECIALIST.png top left) -->
+        <!-- Left Column: Education -->
         <div class="figma-left-col">
-          <div class="figma-edu-block">
-            <div class="figma-header-wrap">
-              <h3 class="figma-header-title">Education</h3>
-              <div class="figma-vector-line right">
-                <span class="figma-dot"></span>
-                <span class="figma-line"></span>
+          <div class="figma-edu-block accordion-block" id="accordionEducation">
+            <div class="accordion-trigger" data-target="eduContent">
+              <div class="figma-header-wrap">
+                <h3 class="figma-header-title">Education</h3>
+                <div class="figma-vector-line right">
+                  <span class="figma-dot"></span>
+                  <span class="figma-line"></span>
+                </div>
               </div>
+              <span class="accordion-icon">+</span>
             </div>
-            <div class="figma-edu-list">
-              <div class="figma-edu-item">
-                <div class="figma-edu-years">
-                  <span>2020</span>
-                  <span>2022</span>
-                </div>
-                <div class="figma-edu-content">
-                  <div class="figma-edu-school">Marcelo H. Del Pilar<br>National High School</div>
-                  <div class="figma-edu-strand">Science, Technology,<br>Engineering, &amp; Mathematics strand</div>
-                  <div class="figma-edu-honors">With Honors</div>
-                </div>
-              </div>
-              <div class="figma-edu-item">
-                <div class="figma-edu-years">
-                  <span>2022</span>
-                  <span>2026</span>
-                </div>
-                <div class="figma-edu-content">
-                  <div class="figma-edu-school">Systems Technology<br>Institute (Malolos)</div>
-                  <div class="figma-edu-strand">Bachelor of Science in<br>Information Technology</div>
-                  <div class="figma-edu-honors">Cum Laude</div>
+            <div class="accordion-content" id="eduContent">
+              <div class="accordion-inner">
+                <div class="figma-edu-list">
+                  <div class="figma-edu-item">
+                    <div class="figma-edu-years">
+                      <span>2016</span>
+                      <span>2020</span>
+                    </div>
+                    <div class="figma-edu-content">
+                      <div class="figma-edu-school">Marcelo H. Del Pilar<br>National High School</div>
+                      <div class="figma-edu-strand">Junior High School —<br>Special Program in the Arts</div>
+                      <div class="figma-edu-honors">With Honors</div>
+                    </div>
+                  </div>
+                  <div class="figma-edu-item">
+                    <div class="figma-edu-years">
+                      <span>2020</span>
+                      <span>2022</span>
+                    </div>
+                    <div class="figma-edu-content">
+                      <div class="figma-edu-school">Marcelo H. Del Pilar<br>National High School</div>
+                      <div class="figma-edu-strand">Senior High School —<br>Science, Technology,<br>Engineering, &amp;
+                        Mathematics strand</div>
+                      <div class="figma-edu-honors">With Honors</div>
+                    </div>
+                  </div>
+                  <div class="figma-edu-item">
+                    <div class="figma-edu-years">
+                      <span>2022</span>
+                      <span>2026</span>
+                    </div>
+                    <div class="figma-edu-content">
+                      <div class="figma-edu-school">Systems Technology<br>Institute (Malolos)</div>
+                      <div class="figma-edu-strand">College — Bachelor of Science<br>in Information Technology</div>
+                      <div class="figma-edu-honors">Cum Laude</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Center Column: Tech Specialist Artwork + Landscape Languages & Frameworks Banner -->
+        <!-- Center Column: Tech Specialist Artwork + Languages & Frameworks -->
         <div class="figma-center-col">
           <!-- Tech Specialist Artwork -->
           <img src="asset/TECH SPECIALIST.png" alt="Tech Specialist — Angel" class="tech-specialist-2" loading="lazy">
 
-          <!-- Languages & Frameworks Block (Positioned Slightly Higher Underneath Artwork) -->
-          <div class="figma-lang-block center-lang-block">
-            <div class="figma-header-wrap center-header-wrap">
-              <h3 class="figma-header-title">Languages &amp; Frameworks</h3>
-              <div class="figma-vector-line center-line">
-                <span class="figma-dot"></span>
-                <span class="figma-line"></span>
-                <span class="figma-dot"></span>
+          <!-- Languages & Frameworks Accordion -->
+          <div class="figma-lang-block center-lang-block accordion-block" id="accordionLang">
+            <div class="accordion-trigger" data-target="langContent">
+              <div class="figma-header-wrap center-header-wrap">
+                <h3 class="figma-header-title">Languages &amp; Frameworks</h3>
+                <div class="figma-vector-line center-line">
+                  <span class="figma-dot"></span>
+                  <span class="figma-line"></span>
+                  <span class="figma-dot"></span>
+                </div>
               </div>
+              <span class="accordion-icon">+</span>
             </div>
-            <div class="figma-lang-grid center-lang-grid">
-              <div>TypeScript</div>
-              <div>CSS</div>
-              <div>JavaScript</div>
-              <div>Python</div>
-              <div>Java</div>
-              <div>C#</div>
-              <div>SQL</div>
-              <div>Dart</div>
-              <div>Swift &amp; Kotlin</div>
-              <div>React</div>
-              <div>Next.js 14</div>
-              <div>Flutter</div>
-              <div>Tailwind CSS</div>
-              <div>Supabase</div>
-              <div>Firebase</div>
+            <div class="accordion-content" id="langContent">
+              <div class="accordion-inner">
+                <div class="figma-lang-grid center-lang-grid">
+                  <div>TypeScript</div>
+                  <div>CSS</div>
+                  <div>JavaScript</div>
+                  <div>Python</div>
+                  <div>Java</div>
+                  <div>C#</div>
+                  <div>SQL</div>
+                  <div>Dart</div>
+                  <div>Swift &amp; Kotlin</div>
+                  <div>React</div>
+                  <div>Next.js 14</div>
+                  <div>Flutter</div>
+                  <div>Tailwind CSS</div>
+                  <div>Supabase</div>
+                  <div>Firebase</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Right Column: Toolkit Image (Moved Upwards to Frame TECH SPECIALIST.png top right) -->
+        <!-- Right Column: Toolkit -->
         <div class="figma-right-col">
-          <div class="figma-toolkit-wrap">
-            <div class="figma-header-wrap" style="text-align: right;">
-              <h3 class="figma-header-title">Toolkit</h3>
-              <div class="figma-vector-line left">
-                <span class="figma-line"></span>
-                <span class="figma-dot"></span>
+          <div class="figma-toolkit-wrap accordion-block" id="accordionToolkit">
+            <div class="accordion-trigger" data-target="toolkitContent">
+              <div class="figma-header-wrap" style="text-align: right;">
+                <h3 class="figma-header-title">Toolkit</h3>
+                <div class="figma-vector-line left">
+                  <span class="figma-line"></span>
+                  <span class="figma-dot"></span>
+                </div>
+              </div>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content" id="toolkitContent">
+              <div class="accordion-inner">
+                <img src="asset/Group 14.png" alt="Toolkit — Development & Design Software" class="figma-toolkit-img"
+                  loading="lazy">
               </div>
             </div>
-            <img src="asset/Group 14.png" alt="Toolkit — Development & Design Software" class="figma-toolkit-img" loading="lazy">
           </div>
         </div>
 
@@ -168,7 +239,8 @@
         <a href="digitalart.html" class="explore-card">
           <div class="explore-card-bg">
             <img src="digitalart/FACTOR, ANGEL E. (Infographic).png" alt="Digital Art Teaser 1" loading="lazy">
-            <img src="digitalart/751870302_1735036920959253_785918651566794023_n (1).jpg" alt="Digital Art Teaser 2" loading="lazy">
+            <img src="digitalart/751870302_1735036920959253_785918651566794023_n (1).jpg" alt="Digital Art Teaser 2"
+              loading="lazy">
           </div>
           <div class="explore-card-overlay">
             <img src="digitalart.png" alt="Digital Art" class="explore-card-title">
@@ -180,8 +252,10 @@
         <!-- Traditional Art Card -->
         <a href="tradart.html" class="explore-card">
           <div class="explore-card-bg">
-            <img src="tradart/751764513_1441959014374667_4327550968881304167_n.jpg" alt="Traditional Art Teaser 1" loading="lazy">
-            <img src="tradart/751914509_1831805608200136_105801705969479557_n.jpg" alt="Traditional Art Teaser 2" loading="lazy">
+            <img src="tradart/751764513_1441959014374667_4327550968881304167_n.jpg" alt="Traditional Art Teaser 1"
+              loading="lazy">
+            <img src="tradart/751914509_1831805608200136_105801705969479557_n.jpg" alt="Traditional Art Teaser 2"
+              loading="lazy">
           </div>
           <div class="explore-card-overlay">
             <img src="traditionalart.png" alt="Traditional Art" class="explore-card-title">
@@ -199,19 +273,21 @@
     <div class="footer-image-wrapper">
       <div class="footer-flip-card" id="footerFlipCard" title="Click to flip contact card">
         <div class="footer-flip-card-inner">
-          
+
           <!-- Front Face: asset/8.png -->
           <div class="footer-card-front">
             <img src="asset/8.png" alt="Angel Portfolio Artwork" class="footer-card-img" loading="lazy">
           </div>
-          
+
           <!-- Back Face: asset/contact.png + Download CV Button directly below WORK WITH ME text -->
           <div class="footer-card-back">
-            <img src="asset/contact.png" alt="Angel Contact Card — angel.e.factor@gmail.com" class="footer-card-img" loading="lazy">
-            
+            <img src="asset/contact.png" alt="Angel Contact Card — angel.e.factor@gmail.com" class="footer-card-img"
+              loading="lazy">
+
             <!-- Download CV Interactive Button (Right Side, Compact, Text-Only) -->
             <div class="contact-card-overlay">
-              <a href="Angel_Factor_CV.pdf" download="Angel_Factor_CV.pdf" class="contact-card-cv-btn" title="Download Angel Factor's CV">
+              <a href="Angel_Factor_CV.pdf" download="Angel_Factor_CV.pdf" class="contact-card-cv-btn"
+                title="Download Angel Factor's CV">
                 Download My CV
               </a>
             </div>
@@ -225,9 +301,12 @@
       <h2 class="footer-contact-title">Let's Connect</h2>
       <a href="mailto:angel.e.factor@gmail.com" class="footer-email-link">angel.e.factor@gmail.com</a>
       <div class="footer-socials">
-        <a href="mailto:angel.e.factor@gmail.com" class="footer-social-link" aria-label="Email" title="Email: angel.e.factor@gmail.com">✉</a>
-        <a href="https://www.instagram.com/nglfctr/" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram" title="Instagram: @nglfctr">📷</a>
-        <a href="https://www.linkedin.com/in/angelfactor" target="_blank" rel="noopener" class="footer-social-link" aria-label="LinkedIn" title="LinkedIn: Angel Factor">in</a>
+        <a href="mailto:angel.e.factor@gmail.com" class="footer-social-link" aria-label="Email"
+          title="Email: angel.e.factor@gmail.com">✉</a>
+        <a href="https://www.instagram.com/nglfctr/" target="_blank" rel="noopener" class="footer-social-link"
+          aria-label="Instagram" title="Instagram: @nglfctr">📷</a>
+        <a href="https://www.linkedin.com/in/angelfactor" target="_blank" rel="noopener" class="footer-social-link"
+          aria-label="LinkedIn" title="LinkedIn: Angel Factor">in</a>
       </div>
       <p class="footer-copyright">&copy; 2026 <a href="index.html">Angel</a>. All rights reserved.</p>
     </div>
@@ -246,4 +325,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
