@@ -450,4 +450,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }, { passive: true });
+
+  // ===== ANTI-PIRACY & ARTWORK PROTECTION SYSTEM =====
+  // 1. Block right-click context menu on all images & gallery items
+  document.addEventListener('contextmenu', (e) => {
+    if (e.target.tagName === 'IMG' || e.target.closest('.gallery-item') || e.target.closest('.explore-card') || e.target.closest('.lightbox-img')) {
+      e.preventDefault();
+    }
+  });
+
+  // 2. Prevent image dragging to desktop or external windows
+  document.addEventListener('dragstart', (e) => {
+    if (e.target.tagName === 'IMG' || e.target.closest('.gallery-item') || e.target.closest('.explore-card')) {
+      e.preventDefault();
+    }
+  });
+
+  // 3. Block save & print keyboard shortcuts (Ctrl+S / Cmd+S / Ctrl+U / Ctrl+P)
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U' || e.key === 'p' || e.key === 'P')) {
+      e.preventDefault();
+    }
+  });
 });

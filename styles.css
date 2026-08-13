@@ -60,6 +60,22 @@
   box-sizing: border-box;
 }
 
+/* ===== ANTI-PIRACY & ARTWORK PROTECTION ===== */
+img,
+.gallery-item,
+.explore-card,
+.footer-card-img,
+.lightbox-img,
+.tech-specialist-2,
+.figma-toolkit-img {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-touch-callout: none !important;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
