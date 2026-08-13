@@ -214,7 +214,7 @@ ul {
   transition: width 0.2s linear;
 }
 
-/* ===== PAGE TRANSITION OVERLAY ===== */
+/* ===== PAGE TRANSITION OVERLAY & HARDWARE ACCELERATION ===== */
 .page-transition {
   position: fixed;
   inset: 0;
@@ -222,7 +222,7 @@ ul {
   background: var(--bg-primary);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .page-transition.active {
@@ -230,31 +230,47 @@ ul {
   pointer-events: all;
 }
 
-/* Page enter animation */
+/* GPU Hardware Acceleration for Zero-Lag Smoothness */
+.hero-bg-section,
+.specialist-section,
+.page-header,
+.gallery-section,
+.explore-section,
+.explore-card,
+.gallery-item,
+.figma-toolkit-img,
+.tech-specialist-2,
+.footer-flip-card {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Sleek Page Enter Animation */
 .page-loaded .hero-bg-section,
 .page-loaded .specialist-section,
 .page-loaded .page-header,
 .page-loaded .gallery-section,
 .page-loaded .footer,
 .page-loaded .explore-section {
-  animation: fadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fadeSlideUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.page-loaded .hero-bg-section { animation-delay: 0.05s; }
-.page-loaded .specialist-section { animation-delay: 0.12s; }
-.page-loaded .explore-section { animation-delay: 0.2s; }
-.page-loaded .page-header { animation-delay: 0.05s; }
-.page-loaded .gallery-section { animation-delay: 0.15s; }
-.page-loaded .footer { animation-delay: 0.25s; }
+.page-loaded .hero-bg-section { animation-delay: 0.04s; }
+.page-loaded .specialist-section { animation-delay: 0.1s; }
+.page-loaded .explore-section { animation-delay: 0.18s; }
+.page-loaded .page-header { animation-delay: 0.04s; }
+.page-loaded .gallery-section { animation-delay: 0.12s; }
+.page-loaded .footer { animation-delay: 0.22s; }
 
 @keyframes fadeSlideUp {
   from {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(28px) translateZ(0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
   }
 }
 
@@ -911,13 +927,17 @@ ul {
   aspect-ratio: 3 / 4;
   background: var(--bg-card);
   border: 1px solid var(--border-light);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease;
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
 }
 
 .explore-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px var(--primary-glow);
+  transform: translateY(-8px) scale(1.025) translateZ(0);
+  border-color: rgba(231, 76, 60, 0.5);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 35px rgba(231, 76, 60, 0.45);
 }
 
 .explore-card-bg {
@@ -1082,13 +1102,41 @@ ul {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+  transform: translateY(30px) translateZ(0);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.gallery-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -85%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.gallery-item:hover::before {
+  left: 135%;
 }
 
 .gallery-item.revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateZ(0);
 }
 
 .gallery-item img {
@@ -1097,7 +1145,8 @@ ul {
   object-fit: cover;
   object-position: top center;
   display: block;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+  will-change: transform;
 }
 
 .gallery-overlay {
@@ -1106,38 +1155,42 @@ ul {
   background: linear-gradient(
     to bottom,
     transparent 30%,
-    rgba(0, 0, 0, 0.65) 100%
+    rgba(15, 0, 0, 0.75) 100%
   );
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity var(--transition);
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 3;
 }
 
 .gallery-icon {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(231, 76, 60, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   font-size: 1.4rem;
-  transform: scale(0.7);
-  transition: transform var(--transition);
+  transform: scale(0.7) translateZ(0);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .gallery-item:hover {
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  border-color: rgba(231, 76, 60, 0.6);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(231, 76, 60, 0.4);
+  transform: translateY(-6px) scale(1.02) translateZ(0);
 }
 
 .gallery-item:hover img {
-  transform: scale(1.08);
+  transform: scale(1.08) translateZ(0);
+  filter: brightness(1.08);
 }
 
 .gallery-item:hover .gallery-overlay {
@@ -1145,8 +1198,14 @@ ul {
 }
 
 .gallery-item:hover .gallery-icon {
-  transform: scale(1);
+  transform: scale(1) translateZ(0);
 }
+
+/* Staggered entrance animation for gallery items */
+.gallery-grid .gallery-item:nth-child(4n + 1) { transition-delay: 0.03s; }
+.gallery-grid .gallery-item:nth-child(4n + 2) { transition-delay: 0.08s; }
+.gallery-grid .gallery-item:nth-child(4n + 3) { transition-delay: 0.13s; }
+.gallery-grid .gallery-item:nth-child(4n + 4) { transition-delay: 0.18s; }
 
 /* ===== LIGHTBOX ===== */
 .lightbox {
