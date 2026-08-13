@@ -244,15 +244,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== 3D FLIPPABLE FOOTER CARD SYSTEM =====
+  // ===== 3D FLIPPABLE FOOTER CARD SYSTEM (FLIP ONLY ON CLICK) =====
   const footerFlipCard = document.getElementById('footerFlipCard');
   if (footerFlipCard) {
     footerFlipCard.addEventListener('click', (e) => {
-      // Allow social links inside card back to be clicked directly without toggling flip
-      if (e.target.closest('.contact-card-link')) return;
+      // Allow Download CV button to be clicked directly without toggling card flip back
+      if (e.target.closest('.contact-card-cv-btn')) return;
       footerFlipCard.classList.toggle('flipped');
     });
   }
+
+  // Automatically flip card to contact.png when "Contact" link is clicked in Nav
+  document.querySelectorAll('a[href="#contact"]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (footerFlipCard) {
+        setTimeout(() => {
+          footerFlipCard.classList.add('flipped');
+        }, 300);
+      }
+    });
+  });
 
   // ===== LIGHTBOX SYSTEM =====
   const lightbox = document.getElementById('lightbox');
