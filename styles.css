@@ -67,7 +67,9 @@ img,
 .footer-card-img,
 .lightbox-img,
 .tech-specialist-2,
-.figma-toolkit-img {
+.figma-toolkit-img,
+.uniform-carousel-card,
+.curved-carousel-card {
   user-select: none !important;
   -webkit-user-select: none !important;
   -moz-user-select: none !important;
@@ -259,7 +261,10 @@ ul {
 .gallery-item,
 .figma-toolkit-img,
 .tech-specialist-2,
-.footer-flip-card {
+.footer-flip-card,
+.gallery-carousel-section,
+.uniform-carousel-card,
+.curved-carousel-card {
   will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -271,7 +276,8 @@ ul {
 .page-loaded .page-header,
 .page-loaded .gallery-section,
 .page-loaded .footer,
-.page-loaded .explore-section {
+.page-loaded .explore-section,
+.page-loaded .gallery-carousel-section {
   animation: fadeSlideUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
@@ -608,7 +614,7 @@ ul {
 .figma-left-col {
   opacity: 0;
   transform: translateX(-25px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
   padding-left: 0;
   padding-right: 0;
   z-index: 3;
@@ -618,7 +624,7 @@ ul {
 .figma-center-col {
   opacity: 0;
   transform: scale(0.96);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: center;
   z-index: 2;
 }
@@ -626,22 +632,22 @@ ul {
 .figma-right-col {
   opacity: 0;
   transform: translateX(25px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
   padding-left: 0;
   padding-right: 0;
   z-index: 3;
   margin-top: 70px;
 }
 
-.page-loaded .figma-left-col,
-.page-loaded .figma-right-col,
+.specialist-section.section-active .figma-left-col,
 .specialist-section.revealed .figma-left-col,
+.specialist-section.section-active .figma-right-col,
 .specialist-section.revealed .figma-right-col {
   opacity: 1;
   transform: translateX(0);
 }
 
-.page-loaded .figma-center-col,
+.specialist-section.section-active .figma-center-col,
 .specialist-section.revealed .figma-center-col {
   opacity: 1;
   transform: scale(1);
@@ -650,7 +656,7 @@ ul {
 /* Headers with White Title Text & Red Vector Line */
 .figma-header-wrap {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   width: 100%;
 }
 
@@ -684,10 +690,10 @@ ul {
   width: 0%;
   flex-grow: 0;
   border-radius: 2px;
-  transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1), flex-grow 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: width 1.8s cubic-bezier(0.16, 1, 0.3, 1), flex-grow 1.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.page-loaded .figma-line,
+.specialist-section.section-active .figma-line,
 .specialist-section.revealed .figma-line {
   width: 100%;
   flex-grow: 1;
@@ -707,80 +713,56 @@ ul {
   margin: 8px auto 0;
 }
 
-/* ===== ACCORDION SYSTEM ===== */
+/* ===== SCROLL-TRIGGERED AUTO-ACCORDION REVEAL & HIDE ===== */
 .accordion-block {
   position: relative;
-}
-
-.accordion-trigger {
-  cursor: pointer;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.accordion-trigger:hover .figma-header-title {
-  color: var(--primary-light);
-  transition: color 0.25s ease;
-}
-
-.accordion-icon {
-  color: #ffffff;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 26px;
-  font-weight: 300;
-  line-height: 1;
-  min-width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    background 0.3s ease,
-    border-color 0.3s ease;
-  flex-shrink: 0;
-  margin-top: 4px;
-}
-
-.accordion-block.open .accordion-icon {
-  transform: rotate(45deg);
-  background: var(--primary);
-  border-color: var(--primary-light);
+  width: 100%;
 }
 
 .accordion-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.4s ease;
   opacity: 0;
+  transform: translateY(22px);
+  /* Smooth, gentle exit collapse (1.6s) */
+  transition: max-height 1.6s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: max-height, opacity, transform;
 }
 
-.accordion-block.open .accordion-content {
+.specialist-section.section-active .accordion-content,
+.specialist-section.revealed .accordion-content {
+  max-height: 850px;
   opacity: 1;
+  transform: translateY(0);
+  /* Smooth, relaxed entrance unfold (1.9s) */
+  transition: max-height 1.9s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Relaxed staggered unfolding on section entry */
+.specialist-section.section-active .figma-left-col .accordion-content,
+.specialist-section.revealed .figma-left-col .accordion-content {
+  transition-delay: 0.35s;
+}
+
+.specialist-section.section-active .figma-center-col .accordion-content,
+.specialist-section.revealed .figma-center-col .accordion-content {
+  transition-delay: 0.65s;
+}
+
+.specialist-section.section-active .figma-right-col .accordion-content,
+.specialist-section.revealed .figma-right-col .accordion-content {
+  transition-delay: 0.95s;
 }
 
 .accordion-inner {
-  padding-top: 16px;
+  padding-top: 14px;
 }
 
-/* Center accordion (Languages) needs centered icon */
-.center-lang-block .accordion-trigger {
-  flex-direction: column;
-  align-items: center;
-}
-
-.center-lang-block .accordion-icon {
-  margin-top: 8px;
-}
-
-/* Interactive Education List — Container Removed for Clean Text Aesthetic */
+/* Interactive Education List — Clean Text Aesthetic */
 .figma-edu-block {
   margin-bottom: 48px;
 }
@@ -1897,6 +1879,637 @@ ul {
   color: var(--primary-light);
 }
 
+/* ===== SHARED CAROUSEL SECTION STYLES ===== */
+.gallery-carousel-section {
+  padding: 85px 0 65px;
+  background: var(--bg-primary);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.gallery-carousel-section.curved-section {
+  background: #1e1d1d;
+}
+
+.section-title-wrap {
+  text-align: center;
+  margin-bottom: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-title-img {
+  max-width: 360px;
+  width: 100%;
+  height: auto;
+  filter: brightness(0) invert(1);
+  margin: 0 auto 6px;
+  display: block;
+  animation: titleFloat 3.5s ease-in-out infinite;
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.section-heading span {
+  background: linear-gradient(135deg, var(--primary-light), var(--accent-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  letter-spacing: 0.2px;
+}
+
+/* Nav Arrow Controls — Minimalist Clean Floating Chevrons (No Circle) */
+.carousel-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 2.8rem;
+  font-weight: 200;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 25;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: none;
+  user-select: none;
+  padding: 4px 8px;
+}
+
+.carousel-arrow-left {
+  left: 4px;
+}
+
+.carousel-arrow-right {
+  right: 4px;
+}
+
+.carousel-nav-arrow:hover {
+  background: transparent;
+  border-color: transparent;
+  color: var(--primary-light);
+  transform: translateY(-50%) scale(1.3);
+  box-shadow: none;
+  text-shadow: 0 0 20px rgba(231, 76, 60, 0.9);
+}
+
+.carousel-dots-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.carousel-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 0;
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.2);
+}
+
+.carousel-dot.active {
+  width: 26px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #b50707, #e74c3c);
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.6);
+}
+
+/* ============================================================
+   1. UNIFORM SHAPE INFINITE CAROUSEL (Website & App)
+   - Matches reference image 1: clean uniform rectangular portrait cards
+   - Grayscale by default, color on hover
+   - Brand RED bottom gradient wash
+   ============================================================ */
+.uniform-carousel-container {
+  position: relative;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 10px 48px;
+}
+
+.uniform-carousel-viewport {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  cursor: grab;
+  user-select: none;
+}
+
+.uniform-carousel-viewport:active {
+  cursor: grabbing;
+}
+
+.uniform-carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.uniform-carousel-card {
+  flex: 0 0 calc((100% - 60px) / 4);
+  min-width: 230px;
+  max-width: 310px;
+  aspect-ratio: 3 / 4.1;
+  position: relative;
+}
+
+.uniform-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #252525;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s ease,
+              border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.uniform-card-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  filter: grayscale(100%) contrast(1.08) brightness(0.96);
+  transition: filter 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Brand RED Gradient wash at bottom */
+.uniform-card-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(
+    to top,
+    rgba(181, 7, 7, 0.65) 0%,
+    rgba(181, 7, 7, 0.28) 45%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.35s ease;
+}
+
+.uniform-card-inner:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(231, 76, 60, 0.7);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.75), 0 0 25px rgba(231, 76, 60, 0.5);
+}
+
+.uniform-card-inner:hover img {
+  filter: grayscale(0%) brightness(1.04) contrast(1.06);
+  transform: scale(1.05);
+}
+
+.uniform-card-inner:hover .uniform-card-gradient {
+  opacity: 0.25;
+}
+
+/* ============================================================
+   2. 3D CURVED SHAPE CAROUSEL (Digital Art & Traditional Art)
+   - Matches Image 1, Image 2, and Image 3 attached by user
+   - Top & bottom arch ellipse masks (z-index: 30) + side vignette fades
+   - 5 cards visible across panoramic arc with 3D perspective
+   ============================================================ */
+.curved-carousel-container {
+  position: relative;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 10px 48px;
+}
+
+.curved-carousel-viewport {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 480px;
+  perspective: 1400px;
+  perspective-origin: center center;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+
+/* Top & Bottom Arch Ellipses matching Image 1 & Figma design */
+.curved-top-arch {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1512px;
+  max-width: 135vw;
+  height: 160px;
+  background: #1e1d1d;
+  border-radius: 50%;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.curved-bottom-arch {
+  position: absolute;
+  bottom: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1512px;
+  max-width: 135vw;
+  height: 160px;
+  background: #1e1d1d;
+  border-radius: 50%;
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* Side Vignette Fades matching Figma rectangles */
+.curved-fade-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100%;
+  background: linear-gradient(90deg, #1e1d1d 0%, #1e1d1d 25%, rgba(30, 29, 29, 0.75) 60%, transparent 100%);
+  z-index: 31;
+  pointer-events: none;
+}
+
+.curved-fade-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 180px;
+  height: 100%;
+  background: linear-gradient(270deg, #1e1d1d 0%, #1e1d1d 25%, rgba(30, 29, 29, 0.75) 60%, transparent 100%);
+  z-index: 31;
+  pointer-events: none;
+}
+
+.curved-carousel-stage {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  transform-style: preserve-3d;
+  gap: 16px;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  height: 400px;
+  width: max-content;
+}
+
+.curved-carousel-card {
+  flex: 0 0 240px;
+  width: 240px;
+  height: 380px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
+  will-change: transform, opacity;
+}
+
+/* 3D Arc Positioning — Perspective angles matching Image 2 & 3 */
+.curved-carousel-card.slot-far-left {
+  transform: perspective(1000px) rotateY(25deg) scale(1.0);
+  opacity: 0.95;
+  z-index: 10;
+}
+
+.curved-carousel-card.slot-mid-left {
+  transform: perspective(1000px) rotateY(13deg) scale(1.0);
+  opacity: 0.95;
+  z-index: 12;
+}
+
+.curved-carousel-card.slot-center {
+  transform: perspective(1000px) rotateY(0deg) scale(1.0);
+  opacity: 1;
+  z-index: 15;
+}
+
+.curved-carousel-card.slot-mid-right {
+  transform: perspective(1000px) rotateY(-13deg) scale(1.0);
+  opacity: 0.95;
+  z-index: 12;
+}
+
+.curved-carousel-card.slot-far-right {
+  transform: perspective(1000px) rotateY(-25deg) scale(1.0);
+  opacity: 0.95;
+  z-index: 10;
+}
+
+.curved-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #202020;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.curved-card-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(100%);
+  transition: filter 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.curved-carousel-card:hover {
+  transform: perspective(1000px) rotateY(0deg) scale(1.15) translateY(-8px) translateZ(30px) !important;
+  z-index: 25 !important;
+  opacity: 1 !important;
+}
+
+.curved-carousel-card:hover .curved-card-inner {
+  border-color: rgba(231, 76, 60, 0.6);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.8), 0 0 30px rgba(231, 76, 60, 0.4);
+}
+
+.curved-carousel-card:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.06);
+}
+
+/* ============================================================
+   3. UNIFIED LIGHTBOX WITH UNIFORM & SCROLLABLE TALL IMAGE FRAMING
+   ============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: min(94vw, 1200px);
+  max-height: 90vh;
+  margin: auto;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #b50707 rgba(255, 255, 255, 0.08);
+}
+
+.lightbox-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lightbox-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+}
+
+.lightbox-content::-webkit-scrollbar-thumb {
+  background: #b50707;
+  border-radius: 4px;
+}
+
+.lightbox-content.tall-mode {
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 35px;
+  padding-bottom: 65px;
+}
+
+.lightbox-img-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #141414;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95), 0 0 35px rgba(231, 76, 60, 0.25);
+  overflow: visible;
+  padding: 8px;
+  margin: auto;
+  transition: all 0.3s ease;
+}
+
+.lightbox-img-wrapper.tall-mode {
+  display: block;
+  max-width: min(94vw, 1050px);
+  width: auto;
+}
+
+.lightbox-img {
+  display: block;
+  border-radius: 8px;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: zoom-in;
+}
+
+/* Regular / Standard Aspect Ratio Images (paintings, square/portrait artworks) */
+.lightbox-img.standard-image {
+  max-width: min(88vw, 1100px);
+  max-height: 80vh;
+  min-height: min(65vh, 500px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Tall / Long Images (Website case studies, full-page mockups, infographics) — High-res, un-stretched */
+.lightbox-img.tall-image {
+  width: 100%;
+  max-width: min(92vw, 1000px);
+  height: auto !important;
+  max-height: none !important;
+  min-height: auto !important;
+  object-fit: contain;
+  aspect-ratio: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.lightbox-img.is-zoomed {
+  cursor: zoom-out;
+  min-height: auto;
+}
+
+.lightbox-zoom-controls {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  display: flex;
+  gap: 8px;
+  z-index: 3005;
+}
+
+.lightbox-zoom-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  touch-action: manipulation;
+}
+
+.lightbox-zoom-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary-light);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 3005;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.lightbox-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 3005;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
+}
+
+.lightbox-counter {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 1px;
+  z-index: 3005;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 1200px) {
@@ -1931,8 +2544,12 @@ ul {
     margin-left: 8px;
   }
 
-  .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .uniform-carousel-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+  }
+
+  .curved-carousel-card {
+    flex: 0 0 calc((100% - 48px) / 4);
   }
 }
 
@@ -1947,7 +2564,6 @@ ul {
     height: 48px;
   }
 
-  /* Hero Section Adjustment for Mobile */
   .hero-bg-section {
     min-height: 60vh;
     padding-top: calc(var(--nav-height) + 16px);
@@ -1987,250 +2603,61 @@ ul {
     width: 100%;
   }
 
-  /* Education Centering on Mobile */
-  .figma-edu-block {
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto 24px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  /* Carousel Mobile Layouts */
+  .gallery-carousel-section {
+    padding: 60px 0 45px;
   }
 
-  .figma-edu-block .figma-header-wrap {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
+  .uniform-carousel-container,
+  .curved-carousel-container {
+    padding: 10px 36px;
   }
 
-  .figma-edu-block .figma-vector-line.right {
-    justify-content: center;
-    max-width: 280px;
-    margin: 6px auto 0;
-    width: 100%;
+  .carousel-nav-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
   }
 
-  .figma-edu-block .figma-vector-line.right .figma-line {
-    margin-left: 6px;
-    margin-right: 6px;
-    flex-grow: 1;
+  .carousel-arrow-left {
+    left: 2px;
   }
 
-  .figma-edu-list {
-    align-items: center;
-    width: 100%;
+  .carousel-arrow-right {
+    right: 2px;
   }
 
-  .figma-edu-item {
-    justify-content: center;
-    text-align: left;
-    max-width: 320px;
-    margin: 0 auto;
-    width: 100%;
+  .uniform-carousel-card {
+    flex: 0 0 calc((100% - 20px) / 2);
+    min-width: 165px;
   }
 
-  /* Toolkit Centering on Mobile */
-  .figma-toolkit-wrap {
-    width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
-    align-items: center;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+  .curved-carousel-card {
+    flex: 0 0 calc((100% - 24px) / 2.5);
+    min-width: 145px;
   }
 
-  .figma-toolkit-wrap .figma-header-wrap {
-    max-width: 280px;
-    text-align: center !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0 auto 16px;
-    width: 100%;
+  .curved-carousel-viewport {
+    padding: 20px 0;
   }
 
-  .figma-toolkit-wrap .figma-vector-line.left {
-    justify-content: center;
-    max-width: 280px;
-    margin: 6px auto 0;
-    width: 100%;
+  .curved-top-arch,
+  .curved-bottom-arch {
+    display: none;
   }
 
-  .figma-toolkit-wrap .figma-vector-line.left .figma-line {
-    margin-left: 6px;
-    margin-right: 6px;
-    flex-grow: 1;
+  .curved-fade-left,
+  .curved-fade-right {
+    width: 80px;
   }
 
-  .figma-toolkit-img {
-    max-width: 280px;
-    width: 100%;
-    margin: 8px auto 0;
-    display: block;
+  .section-title-img {
+    max-width: 270px;
   }
 
-  .tech-specialist-2 {
-    max-width: 100%;
-  }
-
-  /* Mobile Nav Drawer & High Contrast Clickable Links */
-  .nav-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    width: 44px;
-    height: 44px;
-    padding: 9px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 2010;
-    touch-action: manipulation;
-  }
-
-  .nav-toggle:hover,
-  .nav-toggle:active {
-    background: rgba(231, 76, 60, 0.2);
-    border-color: var(--primary-light);
-  }
-
-  .nav-toggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #ffffff;
-    border-radius: 2px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: min(300px, 82vw);
-    height: 100vh;
-    height: 100dvh;
-    flex-direction: column;
-    align-items: stretch;
-    padding: calc(var(--nav-height) + 20px) 20px 30px;
-    background: rgba(14, 14, 14, 0.98);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-left: 1px solid rgba(255, 255, 255, 0.12);
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2005;
-    gap: 10px;
-    pointer-events: none;
-    box-shadow: -15px 0 50px rgba(0, 0, 0, 0.9);
-    overflow-y: auto;
-  }
-
-  .nav-links.open {
-    transform: translateX(0);
-    pointer-events: auto;
-  }
-
-  .nav-links li {
-    width: 100%;
-  }
-
-  .nav-links a {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: #ffffff !important;
-    opacity: 0.92;
-    padding: 14px 18px;
-    width: 100%;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: all 0.25s ease;
-    display: block;
-    touch-action: manipulation;
-    text-align: left;
-  }
-
-  .nav-links a:hover,
-  .nav-links a:active,
-  .nav-links a.active {
-    opacity: 1;
-    color: #ffffff !important;
-    background: rgba(231, 76, 60, 0.25);
-    border-color: var(--primary-light);
-    border-left: 4px solid var(--primary-light);
-    transform: translateX(4px);
-    box-shadow: 0 4px 16px rgba(231, 76, 60, 0.3);
-  }
-
-  /* Gallery Grid */
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-
-  /* Page Header */
-  .page-header {
-    padding-top: calc(var(--nav-height) + 20px);
-    padding-bottom: 20px;
-  }
-
-  .page-title-img {
-    max-width: 280px;
-  }
-
-  /* Explore Section */
-  .explore-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 400px;
-  }
-
-  .explore-card {
-    aspect-ratio: 3 / 4;
-  }
-
-  .explore-section {
-    padding: 50px 0 40px;
-  }
-
-  /* Lightbox */
-  .lightbox-content {
-    max-width: 95vw;
-  }
-
-  .lightbox-content.scrollable .lightbox-img {
-    max-width: 95vw;
-  }
-
-  .lightbox-nav {
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
-  }
-
-  .lightbox-prev {
-    left: 10px;
-  }
-
-  .lightbox-next {
-    right: 10px;
-  }
-
-  .footer-wiggle-img {
-    max-width: 100%;
-  }
-
-  .footer-flip-card {
-    max-width: min(520px, 92vw);
+  .section-subtitle {
+    margin-bottom: 22px;
+    font-size: 0.88rem;
   }
 
   .contact-card-overlay {
@@ -2242,34 +2669,65 @@ ul {
     font-size: 0.78rem;
     padding: 6px 14px;
   }
-}
 
-@media (max-width: 480px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .page-title-img {
-    max-width: 220px;
+  .lightbox-img {
+    min-height: min(45vh, 320px);
+    max-height: 72vh;
+    max-width: 90vw;
   }
 
   .lightbox-nav {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
   }
 
-  .footer-socials {
-    gap: 12px;
+  .lightbox-prev {
+    left: 8px;
   }
 
-  .footer-email-link {
-    font-size: 0.95rem;
-    word-break: break-all;
+  .lightbox-next {
+    right: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .uniform-carousel-container,
+  .curved-carousel-container {
+    padding: 10px 28px;
   }
 
-  .contact-card-cv-btn {
-    font-size: 0.72rem;
-    padding: 5px 12px;
+  .uniform-carousel-card {
+    flex: 0 0 calc(100% - 10px);
+    min-width: 210px;
+  }
+
+  .curved-carousel-card {
+    flex: 0 0 calc((100% - 16px) / 1.4);
+    min-width: 155px;
+  }
+
+  .carousel-nav-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 1.1rem;
+  }
+
+  .carousel-arrow-left {
+    left: -2px;
+  }
+
+  .carousel-arrow-right {
+    right: -2px;
+  }
+
+  .section-title-img {
+    max-width: 220px;
+  }
+
+  .lightbox-img {
+    min-height: 250px;
+    max-height: 68vh;
   }
 }
 
@@ -2324,4 +2782,3 @@ ul {
 
 .gallery-item:nth-child(8) {
   transition-delay: 0.35s;
-}

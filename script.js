@@ -1,7 +1,9 @@
 /* ============================================================
    PORTFOLIO — Global JavaScript
-   Preloader, mobile nav, page transitions, lightbox, accordions,
-   3D flip card, pop-up modal, and scroll reveal
+   Preloader, mobile nav, page transitions, interactive carousels:
+   1. Uniform Infinite Carousel (Website & App)
+   2. 3D Curved Arc Infinite Carousel (Digital & Traditional Art)
+   Lightbox, accordions, 3D flip card, pop-up modal, and scroll reveal
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loaderBarFill) loaderBarFill.style.width = '100%';
     if (siteLoader) siteLoader.classList.add('hidden');
     document.body.classList.add('page-loaded');
-    document.querySelectorAll('.hero-bg-section, .specialist-section, .explore-section, .page-header, .gallery-section, .footer')
+    document.querySelectorAll('.hero-bg-section, .specialist-section, .explore-section, .page-header, .gallery-section, .footer, .gallery-carousel-section')
       .forEach(el => el.classList.add('revealed'));
     if (transition) transition.classList.remove('active');
   }
@@ -82,7 +84,24 @@ document.addEventListener('DOMContentLoaded', () => {
     navOverlay.addEventListener('click', closeMobileNav);
   }
 
-  // ===== 3. PAGE TRANSITION & NAVIGATION CLICKS =====
+  // ===== 3. SMOOTH SCROLL ANCHOR NAVIGATION =====
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        closeMobileNav();
+        const navHeight = document.getElementById('navbar')?.offsetHeight || 0;
+        const targetPos = targetEl.getBoundingClientRect().top + window.scrollY - navHeight;
+        window.scrollTo({ top: targetPos, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Handle non-anchor links (external, emails, downloads)
   document.querySelectorAll('a[href]').forEach(link => {
     link.addEventListener('click', (e) => {
       const href = link.getAttribute('href');
@@ -91,9 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!href || href.startsWith('#') || href.startsWith('mailto:') ||
         href.startsWith('http') || href.startsWith('javascript:') ||
         href.endsWith('.pdf') || link.hasAttribute('download') || link.target === '_blank') {
-        if (href && href.startsWith('#')) {
-          closeMobileNav();
-        }
         return;
       }
 
@@ -121,15 +137,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ===== 4. ACTIVE NAV LINK HIGHLIGHT =====
-  const currentPath = window.location.pathname.replace(/\/$/, '').split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    const href = link.getAttribute('href');
-    const linkPath = (href || '').split('#')[0].replace(/\/$/, '').split('/').pop();
-    if (linkPath === currentPath || (currentPath === '' && (linkPath === 'index.html' || linkPath === ''))) {
-      link.classList.add('active');
-    }
+  // ===== 4. ACTIVE NAV LINK HIGHLIGHT (Scroll-Spy) =====
+  const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+  const sections = [];
+  navAnchors.forEach(link => {
+    const id = link.getAttribute('href');
+    const section = document.querySelector(id);
+    if (section) sections.push({ el: section, link: link });
   });
+
+  function updateActiveNav() {
+    const scrollY = window.scrollY;
+    const navHeight = document.getElementById('navbar')?.offsetHeight || 0;
+    let current = null;
+
+    for (const s of sections) {
+      const top = s.el.offsetTop - navHeight - 120;
+      if (scrollY >= top) {
+        current = s;
+      }
+    }
+
+    navAnchors.forEach(a => a.classList.remove('active'));
+    if (current) current.link.classList.add('active');
+  }
 
   // ===== 5. NAVBAR SCROLL EFFECT & PROGRESS BAR =====
   const navbar = document.getElementById('navbar');
@@ -144,24 +175,46 @@ document.addEventListener('DOMContentLoaded', () => {
       const progress = (scrollY / totalScroll) * 100;
       progressBar.style.width = `${progress}%`;
     }
+
+    updateActiveNav();
   }, { passive: true });
 
-  // ===== 6. SCROLL REVEAL (INTERSECTION OBSERVER) =====
+  // ===== 6. SECTION 2 AUTO-REVEAL & AUTO-HIDE ACCORDION OBSERVER =====
+  const specialistSection = document.getElementById('about');
+  if (specialistSection && 'IntersectionObserver' in window) {
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            specialistSection.classList.add('section-active', 'revealed');
+          } else {
+            specialistSection.classList.remove('section-active');
+          }
+        });
+      },
+      {
+        threshold: 0.20,
+        rootMargin: '-40px 0px -40px 0px'
+      }
+    );
+    sectionObserver.observe(specialistSection);
+  }
+
+  // General reveal observer for gallery carousels & hero
   if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver(
+    const generalObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('revealed');
-            revealObserver.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
     );
 
-    document.querySelectorAll('.gallery-item, .specialist-section, .spec-block, .specialist-img, .tech-specialist-2, .figma-edu-block, .figma-lang-block, .figma-toolkit-wrap, .explore-card, .hero-bg-section').forEach(item => {
-      revealObserver.observe(item);
+    document.querySelectorAll('.gallery-carousel-section, .hero-bg-section').forEach(item => {
+      generalObserver.observe(item);
     });
   }
 
@@ -304,7 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const footerFlipCard = document.getElementById('footerFlipCard');
   if (footerFlipCard) {
     footerFlipCard.addEventListener('click', (e) => {
-      // Don't flip back when clicking the CV download button
       if (e.target.closest('.contact-card-cv-btn')) return;
       footerFlipCard.classList.toggle('flipped');
     });
@@ -322,7 +374,335 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ===== 10. LIGHTBOX SYSTEM (ISOLATED & TOUCH-FRIENDLY) =====
+  // ============================================================
+  // 10. UNIFORM CONSTANT INFINITE CAROUSEL (Website & App)
+  // - Clean uniform rectangular cards with brand RED bottom gradient
+  // - Constant smooth continuous gliding marquee loop
+  // - Pauses on hover, draggable, responsive
+  // ============================================================
+  function initUniformCarousel() {
+    const container = document.getElementById('uniformCarousel');
+    if (!container) return;
+
+    const track = document.getElementById('uniformTrack');
+    const prevBtn = document.getElementById('uniformPrevBtn');
+    const nextBtn = document.getElementById('uniformNextBtn');
+    const dotsWrap = document.getElementById('uniformDots');
+    if (!track) return;
+
+    const originalCards = Array.from(track.children);
+    const totalOriginal = originalCards.length;
+    if (totalOriginal === 0) return;
+
+    // Clone 2 sets to make 3 continuous sets total [Set 0, Set 1, Set 2]
+    originalCards.forEach(card => {
+      const clone1 = card.cloneNode(true);
+      const clone2 = card.cloneNode(true);
+      clone1.classList.add('is-clone');
+      clone2.classList.add('is-clone');
+      track.appendChild(clone1);
+      track.appendChild(clone2);
+    });
+
+    let cardStep = 280;
+    let singleCycleWidth = totalOriginal * cardStep;
+
+    function measure() {
+      const firstCard = track.children[0];
+      if (firstCard) {
+        cardStep = firstCard.offsetWidth + 20; // 20px gap
+        singleCycleWidth = totalOriginal * cardStep;
+      }
+    }
+
+    let currentPos = 0;
+    let targetVelocity = 0.8;
+    let velocity = 0.8;
+    let isHovered = false;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartPos = 0;
+    let animationFrameId = null;
+
+    function buildDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      for (let i = 0; i < totalOriginal; i++) {
+        const dot = document.createElement('button');
+        dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+        dot.setAttribute('aria-label', `Project ${i + 1}`);
+        dot.addEventListener('click', () => {
+          currentPos = i * cardStep;
+          updateDots();
+        });
+        dotsWrap.appendChild(dot);
+      }
+    }
+
+    function updateDots() {
+      if (!dotsWrap) return;
+      const activeIdx = Math.floor(((currentPos % singleCycleWidth) + singleCycleWidth) % singleCycleWidth / cardStep) % totalOriginal;
+      const dots = dotsWrap.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === activeIdx);
+      });
+    }
+
+    // Continuous 60fps RAF loop
+    function animate() {
+      if (!isDragging) {
+        const targetV = isHovered ? 0 : targetVelocity;
+        velocity += (targetV - velocity) * 0.1; // Smooth easing to pause/play
+        currentPos += velocity;
+
+        // Seamless wrap across the single cycle boundary
+        if (currentPos >= singleCycleWidth) {
+          currentPos -= singleCycleWidth;
+        } else if (currentPos < 0) {
+          currentPos += singleCycleWidth;
+        }
+      }
+
+      track.style.transform = `translateX(-${currentPos}px)`;
+      updateDots();
+      animationFrameId = requestAnimationFrame(animate);
+    }
+
+    // Controls
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentPos += cardStep;
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentPos -= cardStep;
+      });
+    }
+
+    container.addEventListener('mouseenter', () => { isHovered = true; });
+    container.addEventListener('mouseleave', () => { isHovered = false; });
+
+    // Drag / Touch support
+    container.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragStartPos = currentPos;
+      track.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const dx = e.clientX - dragStartX;
+      currentPos = dragStartPos - dx;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        track.style.cursor = 'grab';
+      }
+    });
+
+    // Touch
+    container.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      dragStartX = e.touches[0].clientX;
+      dragStartPos = currentPos;
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const dx = e.touches[0].clientX - dragStartX;
+      currentPos = dragStartPos - dx;
+    }, { passive: true });
+
+    container.addEventListener('touchend', () => {
+      isDragging = false;
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      measure();
+    });
+
+    measure();
+    buildDots();
+    animationFrameId = requestAnimationFrame(animate);
+  }
+
+  initUniformCarousel();
+
+  // ============================================================
+  // 11. 3D CURVED SHAPE CAROUSEL (Digital & Trad Art)
+  // - Matches Image 1, Image 2, and Image 3 attached by user
+  // - Removed constant movement: smooth step-based navigation
+  // - Top & bottom arch masks create the perfect silhouette
+  // ============================================================
+  function initCurved3DCarousel(containerId, stageId, prevBtnId, nextBtnId, dotsWrapId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    const stage = document.getElementById(stageId);
+    const prevBtn = document.getElementById(prevBtnId);
+    const nextBtn = document.getElementById(nextBtnId);
+    const dotsWrap = document.getElementById(dotsWrapId);
+    if (!stage) return;
+
+    const cards = Array.from(stage.children);
+    const total = cards.length;
+    if (total === 0) return;
+
+    let centerIndex = 2; // Default start with 3rd artwork centered so 5 cards are visible
+
+    function getCardStep() {
+      const isMobile = window.innerWidth <= 768;
+      const cardWidth = isMobile ? 165 : 240;
+      const gap = 16;
+      return cardWidth + gap;
+    }
+
+    function buildDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('button');
+        dot.className = `carousel-dot ${i === centerIndex ? 'active' : ''}`;
+        dot.setAttribute('aria-label', `Artwork ${i + 1}`);
+        dot.addEventListener('click', () => {
+          centerIndex = i;
+          render3DArch();
+        });
+        dotsWrap.appendChild(dot);
+      }
+    }
+
+    function updateDots() {
+      if (!dotsWrap) return;
+      const dots = dotsWrap.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === centerIndex);
+      });
+    }
+
+    function render3DArch() {
+      const isMobile = window.innerWidth <= 768;
+      const isSmallMobile = window.innerWidth <= 480;
+      const step = getCardStep();
+      const cardWidth = isMobile ? 165 : 240;
+      const viewport = container.querySelector('.curved-carousel-viewport');
+      const viewportWidth = viewport ? viewport.offsetWidth : 1200;
+      const stageCenterX = (viewportWidth / 2) - (cardWidth / 2);
+
+      // Translate stage so active center card is at the center of viewport
+      const targetTranslateX = stageCenterX - (centerIndex * step);
+      stage.style.transform = `translateX(${targetTranslateX}px)`;
+
+      // Apply discrete 3D perspective rotation matching Image 2 & 3
+      cards.forEach((card, idx) => {
+        let dist = idx - centerIndex;
+        if (dist > total / 2) dist -= total;
+        if (dist < -total / 2) dist += total;
+
+        card.classList.remove('slot-far-left', 'slot-mid-left', 'slot-center', 'slot-mid-right', 'slot-far-right');
+
+        if (dist === 0) {
+          card.classList.add('slot-center');
+          card.style.transform = `perspective(1200px) rotateY(0deg) scale(1.0)`;
+          card.style.opacity = '1';
+          card.style.zIndex = '15';
+        } else if (dist === -1) {
+          card.classList.add('slot-mid-left');
+          const angle = isMobile ? 12 : 13;
+          card.style.transform = `perspective(1200px) rotateY(${angle}deg) scale(1.0)`;
+          card.style.opacity = '0.95';
+          card.style.zIndex = '12';
+        } else if (dist === 1) {
+          card.classList.add('slot-mid-right');
+          const angle = isMobile ? -12 : -13;
+          card.style.transform = `perspective(1200px) rotateY(${angle}deg) scale(1.0)`;
+          card.style.opacity = '0.95';
+          card.style.zIndex = '12';
+        } else if (dist === -2) {
+          card.classList.add('slot-far-left');
+          const angle = isMobile ? 22 : 25;
+          card.style.transform = `perspective(1200px) rotateY(${angle}deg) scale(1.0)`;
+          card.style.opacity = isSmallMobile ? '0.35' : '0.95';
+          card.style.zIndex = '10';
+        } else if (dist === 2) {
+          card.classList.add('slot-far-right');
+          const angle = isMobile ? -22 : -25;
+          card.style.transform = `perspective(1200px) rotateY(${angle}deg) scale(1.0)`;
+          card.style.opacity = isSmallMobile ? '0.35' : '0.95';
+          card.style.zIndex = '10';
+        } else {
+          // Offscreen cards
+          const sign = dist > 0 ? -1 : 1;
+          card.style.transform = `perspective(1200px) rotateY(${sign * 30}deg) scale(0.9)`;
+          card.style.opacity = '0.12';
+          card.style.zIndex = '1';
+        }
+      });
+
+      updateDots();
+    }
+
+    function nextSlide() {
+      centerIndex = (centerIndex + 1) % total;
+      render3DArch();
+    }
+
+    function prevSlide() {
+      centerIndex = (centerIndex - 1 + total) % total;
+      render3DArch();
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextSlide();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevSlide();
+      });
+    }
+
+    // Touch / Swipe
+    let touchStartX = 0;
+    container.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    container.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) nextSlide();
+        else prevSlide();
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', render3DArch);
+
+    buildDots();
+    render3DArch();
+  }
+
+  // Initialize both curved artwork carousels
+  initCurved3DCarousel('digitalCurvedCarousel', 'digitalCurvedStage', 'digitalPrevBtn', 'digitalNextBtn', 'digitalDots');
+  initCurved3DCarousel('tradCurvedCarousel', 'tradCurvedStage', 'tradPrevBtn', 'tradNextBtn', 'tradDots');
+
+  // ============================================================
+  // 12. UNIFIED LIGHTBOX SYSTEM (ALL GALLERIES & ARTWORKS)
+  // - Supports tall / full-page mockups with vertical scrolling & readable width
+  // - High-resolution view with zoom, pan, counter, prev/next, touch swipe
+  // ============================================================
   const lightbox = document.getElementById('lightbox');
   if (lightbox) {
     const lightboxImg = document.getElementById('lightboxImg');
@@ -336,9 +716,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxZoomOut = document.getElementById('lightboxZoomOut');
     const lightboxZoomReset = document.getElementById('lightboxZoomReset');
 
-    const galleryImages = [];
-    document.querySelectorAll('.gallery-item img').forEach(img => {
-      galleryImages.push(img.src);
+    // Collect unique images for lightbox
+    const uniqueImages = [];
+    document.querySelectorAll('.uniform-carousel-card:not(.is-clone), .curved-carousel-card, .gallery-item').forEach(card => {
+      const img = card.querySelector('img');
+      if (img && !uniqueImages.includes(img.src)) {
+        uniqueImages.push(img.src);
+      }
     });
 
     let currentIndex = 0;
@@ -406,8 +790,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function openLightbox(index) {
-      if (galleryImages.length === 0) return;
-      currentIndex = index;
+      if (uniqueImages.length === 0) return;
+      currentIndex = (index + uniqueImages.length) % uniqueImages.length;
       resetZoom();
       updateLightboxImage();
       lightbox.classList.add('active');
@@ -422,43 +806,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateLightboxImage() {
       resetZoom();
-      const src = galleryImages[currentIndex];
+      const src = uniqueImages[currentIndex];
       if (!src) return;
       lightboxImg.src = src;
       if (lightboxCounter) {
-        lightboxCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+        lightboxCounter.textContent = `${currentIndex + 1} / ${uniqueImages.length}`;
       }
 
-      if (lightboxContent) {
-        lightboxContent.classList.remove('scrollable');
-        lightboxContent.scrollTop = 0;
-      }
-      if (lightboxScrollHint) lightboxScrollHint.style.display = 'block';
+      // Check aspect ratio to apply tall scrollable mode vs standard mode
+      const tempImg = new Image();
+      tempImg.src = src;
+      tempImg.onload = () => {
+        const ratio = tempImg.naturalHeight / (tempImg.naturalWidth || 1);
+        const wrapper = lightbox.querySelector('.lightbox-img-wrapper');
 
-      lightboxImg.onload = () => {
-        if (lightboxContent && lightboxImg.naturalHeight && lightboxImg.naturalWidth) {
-          const ratio = lightboxImg.naturalHeight / lightboxImg.naturalWidth;
-          if (ratio > 1.5) {
-            lightboxContent.classList.add('scrollable');
+        if (ratio > 1.35) {
+          // Tall / Long image (Mockup / Case Study) -> Full width & vertically scrollable without distortion
+          lightboxImg.className = 'lightbox-img tall-image';
+          lightboxImg.style.width = '100%';
+          lightboxImg.style.maxWidth = 'min(92vw, 1000px)';
+          lightboxImg.style.height = 'auto';
+          lightboxImg.style.maxHeight = 'none';
+          lightboxImg.style.objectFit = 'contain';
+
+          if (lightboxContent) {
+            lightboxContent.classList.add('tall-mode');
+            lightboxContent.scrollTop = 0;
+          }
+          if (wrapper) wrapper.classList.add('tall-mode');
+
+          if (lightboxScrollHint) {
+            lightboxScrollHint.innerHTML = '<i class="fas fa-arrows-alt-v"></i> Scroll to view full case study';
+            lightboxScrollHint.style.display = 'block';
+          }
+        } else {
+          // Standard Artwork -> Uniform proportionate contain
+          lightboxImg.className = 'lightbox-img standard-image';
+          lightboxImg.style.width = '';
+          lightboxImg.style.maxWidth = '';
+          lightboxImg.style.height = '';
+          lightboxImg.style.maxHeight = '';
+          lightboxImg.style.objectFit = 'contain';
+
+          if (lightboxContent) {
+            lightboxContent.classList.remove('tall-mode');
+          }
+          if (wrapper) wrapper.classList.remove('tall-mode');
+
+          if (lightboxScrollHint) {
+            lightboxScrollHint.innerHTML = '<i class="fas fa-search-plus"></i> Click or Pinch to Zoom';
+            lightboxScrollHint.style.display = 'block';
           }
         }
       };
     }
 
     function prevImage() {
-      if (galleryImages.length === 0) return;
-      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      if (uniqueImages.length === 0) return;
+      currentIndex = (currentIndex - 1 + uniqueImages.length) % uniqueImages.length;
       updateLightboxImage();
     }
 
     function nextImage() {
-      if (galleryImages.length === 0) return;
-      currentIndex = (currentIndex + 1) % galleryImages.length;
+      if (uniqueImages.length === 0) return;
+      currentIndex = (currentIndex + 1) % uniqueImages.length;
       updateLightboxImage();
     }
 
-    document.querySelectorAll('.gallery-item').forEach((item, i) => {
-      item.addEventListener('click', () => openLightbox(i));
+    // Attach click listeners to all cards (including clones)
+    document.querySelectorAll('.uniform-carousel-card, .curved-carousel-card, .gallery-item').forEach(card => {
+      card.addEventListener('click', () => {
+        const img = card.querySelector('img');
+        if (img) {
+          const idx = uniqueImages.indexOf(img.src);
+          openLightbox(idx !== -1 ? idx : 0);
+        }
+      });
     });
 
     if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
@@ -505,15 +928,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // ===== 11. ANTI-PIRACY & ARTWORK PROTECTION =====
+  // ===== 13. ANTI-PIRACY & ARTWORK PROTECTION =====
   document.addEventListener('contextmenu', (e) => {
-    if (e.target.tagName === 'IMG' || e.target.closest('.gallery-item') || e.target.closest('.explore-card') || e.target.closest('.lightbox-img')) {
+    if (e.target.tagName === 'IMG' || e.target.closest('.uniform-carousel-card') || e.target.closest('.curved-carousel-card') || e.target.closest('.gallery-item') || e.target.closest('.lightbox-img')) {
       e.preventDefault();
     }
   });
 
   document.addEventListener('dragstart', (e) => {
-    if (e.target.tagName === 'IMG' || e.target.closest('.gallery-item') || e.target.closest('.explore-card')) {
+    if (e.target.tagName === 'IMG' || e.target.closest('.uniform-carousel-card') || e.target.closest('.curved-carousel-card') || e.target.closest('.gallery-item')) {
       e.preventDefault();
     }
   });
