@@ -10,48 +10,116 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== 1. ASSET PRELOADER (GUARANTEES 100% OF IMAGES & ASSETS LOADED) =====
   const siteLoader = document.getElementById('siteLoader');
   const loaderBarFill = document.getElementById('loaderBarFill');
+  const loaderStatus = document.getElementById('loaderStatus');
   const transition = document.getElementById('pageTransition');
 
+  let isLoaded = false;
   function completePageLoad() {
+    if (isLoaded) return;
+    isLoaded = true;
+
     if (loaderBarFill) loaderBarFill.style.width = '100%';
+    if (loaderStatus) loaderStatus.textContent = 'Portfolio Ready';
+
     setTimeout(() => {
       if (siteLoader) siteLoader.classList.add('hidden');
       document.body.classList.add('page-loaded');
       document.querySelectorAll('.hero-bg-section, .specialist-section, .explore-section, .page-header, .gallery-section, .footer, .pinterest-section, .certifications-section, .web-app-section')
         .forEach(el => el.classList.add('revealed'));
       if (transition) transition.classList.remove('active');
-    }, 180);
+    }, 400);
   }
 
-  // Preload all document images into cache before opening website
-  const allImages = Array.from(document.querySelectorAll('img'));
-  let loadedCount = 0;
-  const totalCount = allImages.length;
+  // Collect all images from DOM + key background assets
+  const imgElements = Array.from(document.querySelectorAll('img'));
+  const extraAssets = [
+    'asset/herosectionbg.png',
+    'asset/10.png',
+    'asset/8.png',
+    'asset/contact.png',
+    'title/logo.png',
+    'title/title_digital_art.png',
+    'title/title_traditional_art.png',
+    'title/title_website_app.png'
+  ];
 
-  if (totalCount === 0) {
-    completePageLoad();
-  } else {
-    allImages.forEach(img => {
-      const src = img.getAttribute('src');
-      if (!src) {
-        loadedCount++;
-        return;
+  const uniqueSrcs = new Set();
+  imgElements.forEach(img => {
+    const src = img.getAttribute('src');
+    if (src) uniqueSrcs.add(src);
+  });
+  extraAssets.forEach(src => uniqueSrcs.add(src));
+
+  const totalAssets = uniqueSrcs.size || 1;
+  let loadedAssets = 0;
+  let simulatedPercent = 0;
+
+  // Smooth progress bar update function
+  function updateProgressDisplay(targetPercent) {
+    simulatedPercent = Math.max(simulatedPercent, Math.min(Math.round(targetPercent), 100));
+    if (loaderBarFill) loaderBarFill.style.width = `${simulatedPercent}%`;
+    if (loaderStatus) loaderStatus.textContent = `Loading Portfolio... ${simulatedPercent}%`;
+  }
+
+  // Preload all assets with Image() and optional decode()
+  const startTime = Date.now();
+  const minLoadTimeMs = 2800; // Deliberate smooth duration ensuring everything is loaded
+
+  uniqueSrcs.forEach(src => {
+    const preloadImg = new Image();
+    const onAssetDone = () => {
+      loadedAssets++;
+      const rawPercent = (loadedAssets / totalAssets) * 100;
+      updateProgressDisplay(rawPercent * 0.95);
+
+      if (loadedAssets >= totalAssets) {
+        // When all images finish, ensure minLoadTimeMs is satisfied before opening
+        const elapsed = Date.now() - startTime;
+        const remainingTime = Math.max(0, minLoadTimeMs - elapsed);
+        setTimeout(() => {
+          updateProgressDisplay(100);
+          setTimeout(completePageLoad, 350);
+        }, remainingTime);
       }
-      const preloadImg = new Image();
-      preloadImg.onload = preloadImg.onerror = () => {
-        loadedCount++;
-        const percent = Math.min(Math.floor((loadedCount / totalCount) * 100), 100);
-        if (loaderBarFill) loaderBarFill.style.width = `${percent}%`;
-        if (loadedCount >= totalCount) {
-          setTimeout(completePageLoad, 200);
-        }
-      };
-      preloadImg.src = src;
-    });
+    };
 
-    // Safety fallback: guaranteed open within 2500ms max
-    setTimeout(completePageLoad, 2500);
+    preloadImg.onload = () => {
+      if (preloadImg.decode) {
+        preloadImg.decode().then(onAssetDone).catch(onAssetDone);
+      } else {
+        onAssetDone();
+      }
+    };
+    preloadImg.onerror = onAssetDone;
+    preloadImg.src = src;
+  });
+
+  // Fonts ready listener
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      updateProgressDisplay(simulatedPercent + 5);
+    });
   }
+
+  // Smooth simulated progress ticker for visual feedback during network wait
+  const progressTicker = setInterval(() => {
+    if (isLoaded) {
+      clearInterval(progressTicker);
+      return;
+    }
+    const elapsed = Date.now() - startTime;
+    const timeProgress = Math.min((elapsed / minLoadTimeMs) * 90, 90);
+    const assetProgress = (loadedAssets / totalAssets) * 90;
+    const currentProgress = Math.max(timeProgress, assetProgress);
+    updateProgressDisplay(currentProgress);
+  }, 120);
+
+  // Safety fallback maximum (guarantees site reveals even on slow 3G networks)
+  setTimeout(() => {
+    clearInterval(progressTicker);
+    updateProgressDisplay(100);
+    completePageLoad();
+  }, 4500);
 
   // ===== 2. MOBILE BURGER NAVIGATION & PAGE LINKS =====
   const navToggle = document.getElementById('navToggle');
