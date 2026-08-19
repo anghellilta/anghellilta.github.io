@@ -1409,10 +1409,14 @@ ul {
   box-shadow: var(--shadow-sm);
   transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   cursor: pointer;
+  content-visibility: auto;
+  contain-intrinsic-size: 420px;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .web-project-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-8px) translateZ(0);
   border-color: rgba(231, 76, 60, 0.6);
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 25px rgba(231, 76, 60, 0.2);
 }
@@ -2770,6 +2774,8 @@ ul {
   box-shadow: var(--shadow-sm);
   position: relative;
   cursor: pointer;
+  content-visibility: auto;
+  contain-intrinsic-size: 320px;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
               box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
               border-color 0.35s ease;
@@ -2778,7 +2784,7 @@ ul {
 }
 
 .pin-card:hover {
-  transform: translateY(-8px) scale(1.015);
+  transform: translateY(-8px) scale(1.015) translateZ(0);
   border-color: rgba(231, 76, 60, 0.7);
   box-shadow: 0 24px 55px rgba(0, 0, 0, 0.8), 0 0 30px rgba(192, 57, 43, 0.4);
 }
