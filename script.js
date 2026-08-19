@@ -1,48 +1,57 @@
 /* ============================================================
    PORTFOLIO — Global JavaScript
-   Preloader, mobile nav, page transitions, interactive carousels:
-   1. Uniform Infinite Carousel (Website & App)
-   2. 3D Curved Arc Infinite Carousel (Digital & Traditional Art)
-   Lightbox, accordions, 3D flip card, pop-up modal, and scroll reveal
+   Preloader, mobile nav, page transitions, Pinterest Masonry Board,
+   interactive filter pills, unified lightbox, accordions, 3D flip card,
+   pop-up modals, and scroll reveal
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ===== 1. SITE PRELOADER & HERO REVEAL =====
+  // ===== 1. ASSET PRELOADER (GUARANTEES 100% OF IMAGES & ASSETS LOADED) =====
   const siteLoader = document.getElementById('siteLoader');
   const loaderBarFill = document.getElementById('loaderBarFill');
   const transition = document.getElementById('pageTransition');
 
   function completePageLoad() {
     if (loaderBarFill) loaderBarFill.style.width = '100%';
-    if (siteLoader) siteLoader.classList.add('hidden');
-    document.body.classList.add('page-loaded');
-    document.querySelectorAll('.hero-bg-section, .specialist-section, .explore-section, .page-header, .gallery-section, .footer, .gallery-carousel-section')
-      .forEach(el => el.classList.add('revealed'));
-    if (transition) transition.classList.remove('active');
+    setTimeout(() => {
+      if (siteLoader) siteLoader.classList.add('hidden');
+      document.body.classList.add('page-loaded');
+      document.querySelectorAll('.hero-bg-section, .specialist-section, .explore-section, .page-header, .gallery-section, .footer, .pinterest-section, .certifications-section, .web-app-section')
+        .forEach(el => el.classList.add('revealed'));
+      if (transition) transition.classList.remove('active');
+    }, 180);
   }
 
-  let progress = 0;
-  const loadInterval = setInterval(() => {
-    progress += Math.floor(Math.random() * 20) + 15;
-    if (progress >= 100) {
-      progress = 100;
-      clearInterval(loadInterval);
-      setTimeout(completePageLoad, 200);
-    } else {
-      if (loaderBarFill) loaderBarFill.style.width = `${progress}%`;
-    }
-  }, 25);
+  // Preload all document images into cache before opening website
+  const allImages = Array.from(document.querySelectorAll('img'));
+  let loadedCount = 0;
+  const totalCount = allImages.length;
 
-  // Safety fallback: guaranteed load within 450ms
-  window.addEventListener('load', () => {
-    clearInterval(loadInterval);
+  if (totalCount === 0) {
     completePageLoad();
-  });
-  setTimeout(() => {
-    clearInterval(loadInterval);
-    completePageLoad();
-  }, 450);
+  } else {
+    allImages.forEach(img => {
+      const src = img.getAttribute('src');
+      if (!src) {
+        loadedCount++;
+        return;
+      }
+      const preloadImg = new Image();
+      preloadImg.onload = preloadImg.onerror = () => {
+        loadedCount++;
+        const percent = Math.min(Math.floor((loadedCount / totalCount) * 100), 100);
+        if (loaderBarFill) loaderBarFill.style.width = `${percent}%`;
+        if (loadedCount >= totalCount) {
+          setTimeout(completePageLoad, 200);
+        }
+      };
+      preloadImg.src = src;
+    });
+
+    // Safety fallback: guaranteed open within 2500ms max
+    setTimeout(completePageLoad, 2500);
+  }
 
   // ===== 2. MOBILE BURGER NAVIGATION & PAGE LINKS =====
   const navToggle = document.getElementById('navToggle');
@@ -200,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sectionObserver.observe(specialistSection);
   }
 
-  // General reveal observer for gallery carousels & hero
+  // General reveal observer for Pinterest board, cards & hero
   if ('IntersectionObserver' in window) {
     const generalObserver = new IntersectionObserver(
       (entries) => {
@@ -213,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
       { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
     );
 
-    document.querySelectorAll('.gallery-carousel-section, .hero-bg-section').forEach(item => {
+    document.querySelectorAll('.pinterest-section, .hero-bg-section, .pin-card').forEach(item => {
       generalObserver.observe(item);
     });
   }
@@ -353,6 +362,210 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Attach pop-up triggers for Certifications & Credentials
+  const certDetails = {
+    'asean-ai': {
+      badge: 'Credential • AI Readiness',
+      title: 'AI Ready ASEAN Certificate',
+      subtitle: 'ASEAN Foundation • May 2026',
+      body: 'Issued by the ASEAN Foundation. Demonstrates validated proficiency in artificial intelligence fundamentals, generative AI tools, prompt engineering, data analytics, and ethical AI implementation across modern digital workflows.'
+    },
+    'ibm-uiux': {
+      badge: 'Credential • Design & UX',
+      title: 'IBM UI/UX Designer Professional Certificate',
+      subtitle: 'IBM • January 2026',
+      body: 'Issued by IBM. Professional multi-course certification in user research, wireframing, high-fidelity interactive prototyping, design systems in Figma, accessibility (WCAG), and responsive digital product architecture.'
+    },
+    'google-pm': {
+      badge: 'Credential • Project Management',
+      title: 'Google Project Management Certificate',
+      subtitle: 'Google • January 2026',
+      body: 'Issued by Google. Comprehensive credential covering Agile, Scrum, Kanban, project planning, documentation, risk mitigation, sprint lifecycle tracking, and stakeholder communication.'
+    },
+    'google-sec': {
+      badge: 'Credential • Security & Risk',
+      title: 'Google Security Risk Management Certificate',
+      subtitle: 'Google • December 2025',
+      body: 'Issued by Google. In-depth training on vulnerability assessment, risk management frameworks (NIST/ISO), security auditing, threat detection, incident response, and cybersecurity governance.'
+    },
+    'cisco-os': {
+      badge: 'Credential • Systems & Network',
+      title: 'Cisco Operating Systems Support Certificate',
+      subtitle: 'Cisco • December 2025',
+      body: 'Issued by Cisco. Core competencies in operating systems architecture, Linux command-line utilities, Windows Server administration, network connectivity, process scheduling, and enterprise systems troubleshooting.'
+    },
+    'alison-cyber': {
+      badge: 'Credential • Cybersecurity',
+      title: 'Alison Cybersecurity Fundamentals Certificate',
+      subtitle: 'Alison • May 2025',
+      body: 'Issued by Alison. Covers information security principles, threat modeling, network defense architectures, cryptography standards, malware defense, and security policy enforcement.'
+    },
+    'sap-hana': {
+      badge: 'Credential • Enterprise ERP',
+      title: 'SAP S/4HANA Certificate',
+      subtitle: 'SAP • December 2024',
+      body: 'Issued by SAP. Validation of enterprise resource planning (ERP) workflows, real-time in-memory database management, business transaction integration, financial/operational module coordination, and analytics in SAP S/4HANA.'
+    },
+    'oracle-java': {
+      badge: 'Credential • Software Engineering',
+      title: 'Oracle Java Fundamentals Certificate',
+      subtitle: 'Oracle • September 2023',
+      body: 'Issued by Oracle. Foundational mastery of object-oriented programming (OOP) paradigms, classes, inheritance, interfaces, exception handling, data structures, and Java SE core development.'
+    }
+  };
+
+  // Detailed Case Study Data for Web & App Projects
+  const projectDetails = {
+    'convinced-ai': {
+      badge: 'B2B Tech & Outsourcing • Case Study',
+      title: 'Convinced AI: B2B Technology & Outsourcing Platform',
+      subtitle: 'S.P. Madrid & Associates (Internship) • Front-End Developer & UI/UX Designer',
+      body: '<strong>Tech Stack & Tools:</strong> Figma, React, Next.js 14, Tailwind CSS, Visual Studio Code, Vercel<br><br>' +
+        '<strong>Project Overview:</strong> I designed and developed the complete landing page for Convinced AI, an IT outsourcing and staff augmentation platform highlighting Philippines-based tech solutions. My goal was to create a high-converting, professional B2B interface that communicates scale, technical expertise, and operational excellence.<br><br>' +
+        '<strong>Key Features & Implementation:</strong><br>' +
+        '• <strong>Modern Tech Aesthetic:</strong> Sleek dark-mode foundation with vibrant neon-green brand accents and crisp white content blocks.<br>' +
+        '• <strong>Trust-Building Metrics & Grids:</strong> High-impact hero section with statistical counters ("200+", "3000+", "18 Years") and structured service grids.<br>' +
+        '• <strong>Dynamic Visual Hierarchy:</strong> Contrasting dark feature cards alongside workspace galleries to humanize offshore teams.<br>' +
+        '• <strong>Interactive Components:</strong> Scrolling ticker tapes, accordion menus for the Culture section, and a numbered How it Works timeline.'
+    },
+    'workmojo': {
+      badge: 'Gamified App • Case Study',
+      title: 'WorkMojo: Gamified Employee Engagement App',
+      subtitle: 'S.P. Madrid & Associates (Internship) • UI/UX Designer & Frontend Developer',
+      body: '<strong>Tech Stack & Tools:</strong> Figma, Visual Studio Code, Next.js, React, Tailwind CSS<br><br>' +
+        '<strong>Project Overview:</strong> I led the UI/UX design and frontend development for WorkMojo, an internal application built to boost employee engagement and track performance metrics into an interactive, visually appealing, and highly rewarding digital experience.<br><br>' +
+        '<strong>Key Features & Implementation:</strong><br>' +
+        '• <strong>Gamified Interface:</strong> Achievement badges, progress trackers, leaderboards, and an avatar system to incentivize performance.<br>' +
+        '• <strong>User-Centric Workflows:</strong> Seamless navigation between performance dashboards, peer recognition feeds, and reward claiming.<br>' +
+        '• <strong>Prototyping & Visual Hierarchy:</strong> High-fidelity wireframes and interactive prototypes in Figma aligning with corporate goals.<br>' +
+        '• <strong>Mobile-First Approach:</strong> Highly responsive screens and clean, maintainable frontend components.'
+    },
+    'chromaskin': {
+      badge: 'AI Mobile Platform • Capstone',
+      title: 'Chromaskin: AI-Powered Personal Color Analysis',
+      subtitle: 'College Capstone Project • Full Stack Developer & UI/UX Designer / Technical Lead',
+      body: '<strong>Tech Stack & Tools:</strong> Flutter, Dart, Visual Studio Code, Supabase, REST APIs, Google ML Kit<br><br>' +
+        '<strong>Project Overview:</strong> I served as the lead designer and developer for Chromaskin, an AI-powered mobile platform designed to make personal color analysis accessible and affordable. Architected a machine learning-driven solution optimized for diverse complexions, particularly within the Philippine market.<br><br>' +
+        '<strong>Key Features & Implementation:</strong><br>' +
+        '• <strong>End-to-End Architecture:</strong> Designed UX in Figma and built cross-platform application in Flutter/Dart with Supabase backend.<br>' +
+        '• <strong>AI/ML Integration:</strong> Google ML Kit and an AR virtual try-on layer to analyze facial features accurately via smartphone cameras.<br>' +
+        '• <strong>Cohesive User Journey:</strong> Seamless onboarding flow and intuitive "Color Academy" dashboard tracking user color analysis progress.'
+    },
+    'sp-madrid-dubai': {
+      badge: 'Corporate Web • Case Study',
+      title: 'S.P. Madrid Dubai Hub: Corporate Landing Page',
+      subtitle: 'S.P. Madrid & Associates (Internship) • UI/UX Designer & Frontend Developer',
+      body: '<strong>Tech Stack & Tools:</strong> Figma, Visual Studio Code, Next.js, Tailwind CSS, Vercel<br><br>' +
+        '<strong>Project Overview:</strong> I spearheaded the UI/UX design and frontend development for the S.P. Madrid Dubai Hub web presence. Digital front door for GCC debt recovery solutions requiring a highly professional, trustworthy, and internationally accessible design.<br><br>' +
+        '<strong>Key Features & Implementation:</strong><br>' +
+        '• <strong>Corporate Branding & Trust:</strong> Authoritative visual design featuring partner institution logos and team profiles.<br>' +
+        '• <strong>Responsive Frontend Build:</strong> Clean, responsive code translated from Figma mockups and deployed to Vercel with custom domain.<br>' +
+        '• <strong>Multi-Language Accessibility:</strong> Multi-language interface supporting Arabic, English, Hindi, and Filipino for GCC demographics.'
+    },
+    'lean-it': {
+      badge: 'Client-Based CRM • Case Study',
+      title: 'Lean IT Solutions: Client-Based CRM System',
+      subtitle: 'Academic Project (2024) • UI/UX Designer & Frontend Developer',
+      body: '<strong>Tech Stack & Tools:</strong> Figma, HTML, CSS, JavaScript, Visual Studio Code<br><br>' +
+        '<strong>Project Overview:</strong> I was tasked with simplifying dense data workflows and multi-step reporting processes for a real-world client. Designed and developed a clean, modern CRM interface focused on data clarity and ease of use.<br><br>' +
+        '<strong>Key Features & Implementation:</strong><br>' +
+        '• <strong>Data Visualization & Layout:</strong> Minimalist design aesthetic with fluid visual accents making dense tabular data easy to read.<br>' +
+        '• <strong>Frictionless Navigation:</strong> Intuitive prototypes across 5+ reporting modules improving task completion speed.'
+    },
+    'quizard': {
+      badge: 'Educational 2D Game • Case Study',
+      title: 'Quizard: Educational 2D Adventure Game',
+      subtitle: '1st Year College Project • Game UI Designer & Frontend Developer',
+      body: '<strong>Tech Stack & Tools:</strong> Figma, Krita, NetBeans (Java)<br><br>' +
+        '<strong>Project Overview:</strong> I designed and developed the frontend for Quizard, an engaging educational 2D game centered around testing players on random facts and general knowledge.<br><br>' +
+        '<strong>Key Features & Implementation:</strong><br>' +
+        '• <strong>Art Direction & Asset Creation:</strong> Visual direction in Krita creating original character designs, magical UI elements, and 2D world assets.<br>' +
+        '• <strong>Game UI Integration:</strong> Menus, leaderboards, and game HUDs prototyped in Figma before implementing in Java/NetBeans.'
+    },
+    'prismport': {
+      badge: 'Editorial Platform • Case Study',
+      title: 'Prismport: Editorial Art History Platform',
+      subtitle: 'UI/UX Design & Layout Concept • UI/UX Designer',
+      body: '<strong>Tech Stack & Tools:</strong> Figma, UI/UX, Classical Typography, Layout Design<br><br>' +
+        '<strong>Project Overview:</strong> I designed an immersive, editorial-style web experience celebrating historical achievements of 20 international and national artists, prominently featuring expansive profiles on figures like Gustave Doré.<br><br>' +
+        '<strong>Key Features & Implementation:</strong><br>' +
+        '• <strong>Typographic Hierarchy:</strong> Bold classical serif typography paired with striking red accents creating a magazine-like reading experience.<br>' +
+        '• <strong>Historical Timeline Design:</strong> Structured layout guiding users through chronological milestones and iconic pieces, balancing dense text with high-impact imagery.'
+    }
+  };
+
+  // Bind Web Project Case Study buttons
+  document.querySelectorAll('.web-project-details-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.web-project-card');
+      const projectKey = card ? card.getAttribute('data-project-key') : null;
+      const data = projectKey ? projectDetails[projectKey] : null;
+      if (data) {
+        openInfoPopup(data.badge, data.title, data.subtitle, data.body);
+      }
+    });
+  });
+
+  // Attach accordion toggle behavior for Certifications Timeline
+  document.querySelectorAll('.cert-timeline-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const item = card.closest('.cert-timeline-item');
+      if (item) {
+        const wasActive = item.classList.contains('active');
+        item.classList.toggle('active', !wasActive);
+      }
+    });
+  });
+
+  // Update Certifications Timeline Scroll Progress & Node Illumination
+  function updateCertTimelineProgress() {
+    const certSection = document.getElementById('certifications');
+    const progressFill = document.getElementById('certTimelineProgress');
+    if (!certSection || !progressFill) return;
+
+    const rect = certSection.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    if (rect.top <= windowHeight && rect.bottom >= 0) {
+      const sectionHeight = rect.height;
+      const scrollPos = (windowHeight * 0.65) - rect.top;
+      const progressPercent = Math.min(Math.max((scrollPos / sectionHeight) * 100, 0), 100);
+      progressFill.style.height = `${progressPercent}%`;
+
+      // Auto-illuminate timeline star nodes & cards based on scroll progress
+      const items = Array.from(certSection.querySelectorAll('.cert-timeline-item'));
+      items.forEach(item => {
+        const itemRect = item.getBoundingClientRect();
+        const node = item.querySelector('.cert-timeline-node');
+        const triggerThreshold = windowHeight * 0.68;
+
+        if (itemRect.top <= triggerThreshold) {
+          item.classList.add('illuminated');
+          if (node) node.classList.add('illuminated');
+        } else {
+          item.classList.remove('illuminated');
+          if (node) node.classList.remove('illuminated');
+        }
+      });
+    }
+  }
+
+  window.addEventListener('scroll', updateCertTimelineProgress, { passive: true });
+  updateCertTimelineProgress();
+
+  // Attach pop-up trigger for Location Block & Text
+  document.querySelectorAll('.figma-location-item, .footer-location-text, .figma-location-pill, .footer-location-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      openInfoPopup(
+        'Location & Availability',
+        'Plaridel, Bulacan',
+        'Philippines • Work Availability',
+        'Primary location based in Plaridel, Bulacan. Available and actively open for Remote opportunities worldwide as well as on-site / hybrid positions and nearby relocation.'
+      );
+    });
+  });
+
   // ===== 9. 3D FLIPPABLE FOOTER CARD SYSTEM =====
   const footerFlipCard = document.getElementById('footerFlipCard');
   if (footerFlipCard) {
@@ -375,333 +588,102 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ============================================================
-  // 10. UNIFORM CONSTANT INFINITE CAROUSEL (Website & App)
-  // - Clean uniform rectangular cards with brand RED bottom gradient
-  // - Constant smooth continuous gliding marquee loop
-  // - Pauses on hover, draggable, responsive
+  // 10. PINTEREST-STYLE MASONRY BOARD & FILTER SYSTEM (ARTWORKS)
+  // - Category filtering for 34 Creative Artworks
+  // - Smooth stagger animations and active counts
   // ============================================================
-  function initUniformCarousel() {
-    const container = document.getElementById('uniformCarousel');
-    if (!container) return;
+  function initPinterestBoard() {
+    const filterBar = document.getElementById('pinterestFilterBar');
+    const grid = document.getElementById('pinterestGrid');
+    if (!grid) return;
 
-    const track = document.getElementById('uniformTrack');
-    const prevBtn = document.getElementById('uniformPrevBtn');
-    const nextBtn = document.getElementById('uniformNextBtn');
-    const dotsWrap = document.getElementById('uniformDots');
-    if (!track) return;
+    const cards = Array.from(grid.querySelectorAll('.pin-card'));
+    const filterPills = filterBar ? Array.from(filterBar.querySelectorAll('.filter-pill')) : [];
 
-    const originalCards = Array.from(track.children);
-    const totalOriginal = originalCards.length;
-    if (totalOriginal === 0) return;
-
-    // Clone 2 sets to make 3 continuous sets total [Set 0, Set 1, Set 2]
-    originalCards.forEach(card => {
-      const clone1 = card.cloneNode(true);
-      const clone2 = card.cloneNode(true);
-      clone1.classList.add('is-clone');
-      clone2.classList.add('is-clone');
-      track.appendChild(clone1);
-      track.appendChild(clone2);
-    });
-
-    let cardStep = 280;
-    let singleCycleWidth = totalOriginal * cardStep;
-
-    function measure() {
-      const firstCard = track.children[0];
-      if (firstCard) {
-        cardStep = firstCard.offsetWidth + 20; // 20px gap
-        singleCycleWidth = totalOriginal * cardStep;
-      }
-    }
-
-    let currentPos = 0;
-    let targetVelocity = 0.8;
-    let velocity = 0.8;
-    let isHovered = false;
-    let isDragging = false;
-    let dragStartX = 0;
-    let dragStartPos = 0;
-    let animationFrameId = null;
-
-    function buildDots() {
-      if (!dotsWrap) return;
-      dotsWrap.innerHTML = '';
-      for (let i = 0; i < totalOriginal; i++) {
-        const dot = document.createElement('button');
-        dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
-        dot.setAttribute('aria-label', `Project ${i + 1}`);
-        dot.addEventListener('click', () => {
-          currentPos = i * cardStep;
-          updateDots();
-        });
-        dotsWrap.appendChild(dot);
-      }
-    }
-
-    function updateDots() {
-      if (!dotsWrap) return;
-      const activeIdx = Math.floor(((currentPos % singleCycleWidth) + singleCycleWidth) % singleCycleWidth / cardStep) % totalOriginal;
-      const dots = dotsWrap.querySelectorAll('.carousel-dot');
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === activeIdx);
+    function applyFilter(category) {
+      // Update filter pills active state
+      filterPills.forEach(pill => {
+        const isMatch = pill.getAttribute('data-filter') === category;
+        pill.classList.toggle('active', isMatch);
+        pill.setAttribute('aria-selected', isMatch ? 'true' : 'false');
       });
-    }
 
-    // Continuous 60fps RAF loop
-    function animate() {
-      if (!isDragging) {
-        const targetV = isHovered ? 0 : targetVelocity;
-        velocity += (targetV - velocity) * 0.1; // Smooth easing to pause/play
-        currentPos += velocity;
+      // Switch single title image smoothly (one title at a time)
+      const singleTitleImg = document.getElementById('artSingleTitleImg');
+      if (singleTitleImg) {
+        const isTrad = (category === 'traditional-art');
+        const targetSrc = isTrad ? 'asset/title_traditional_art.png' : 'asset/title_digital_art.png';
+        const targetAlt = isTrad ? 'Traditional Art' : 'Digital Art';
 
-        // Seamless wrap across the single cycle boundary
-        if (currentPos >= singleCycleWidth) {
-          currentPos -= singleCycleWidth;
-        } else if (currentPos < 0) {
-          currentPos += singleCycleWidth;
+        if (!singleTitleImg.src.endsWith(targetSrc)) {
+          singleTitleImg.style.opacity = '0';
+          singleTitleImg.style.transform = 'scale(0.92)';
+          setTimeout(() => {
+            singleTitleImg.src = targetSrc;
+            singleTitleImg.alt = targetAlt;
+            singleTitleImg.style.opacity = '1';
+            singleTitleImg.style.transform = 'scale(1)';
+          }, 180);
         }
       }
 
-      track.style.transform = `translateX(-${currentPos}px)`;
-      updateDots();
-      animationFrameId = requestAnimationFrame(animate);
-    }
+      // Filter cards
+      let delay = 0;
+      cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        const shouldShow = (category === 'all' || cardCategory === category);
 
-    // Controls
-    if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentPos += cardStep;
-      });
-    }
+        card.classList.remove('pin-animating');
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentPos -= cardStep;
-      });
-    }
-
-    container.addEventListener('mouseenter', () => { isHovered = true; });
-    container.addEventListener('mouseleave', () => { isHovered = false; });
-
-    // Drag / Touch support
-    container.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      dragStartX = e.clientX;
-      dragStartPos = currentPos;
-      track.style.cursor = 'grabbing';
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      const dx = e.clientX - dragStartX;
-      currentPos = dragStartPos - dx;
-    });
-
-    window.addEventListener('mouseup', () => {
-      if (isDragging) {
-        isDragging = false;
-        track.style.cursor = 'grab';
-      }
-    });
-
-    // Touch
-    container.addEventListener('touchstart', (e) => {
-      isDragging = true;
-      dragStartX = e.touches[0].clientX;
-      dragStartPos = currentPos;
-    }, { passive: true });
-
-    container.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      const dx = e.touches[0].clientX - dragStartX;
-      currentPos = dragStartPos - dx;
-    }, { passive: true });
-
-    container.addEventListener('touchend', () => {
-      isDragging = false;
-    }, { passive: true });
-
-    window.addEventListener('resize', () => {
-      measure();
-    });
-
-    measure();
-    buildDots();
-    animationFrameId = requestAnimationFrame(animate);
-  }
-
-  initUniformCarousel();
-
-  // ============================================================
-  // 11. 3D CURVED SHAPE CAROUSEL (Digital & Trad Art)
-  // - Matches Image 1, Image 2, and Image 3 attached by user
-  // - Removed constant movement: smooth step-based navigation
-  // - Top & bottom arch masks create the perfect silhouette
-  // ============================================================
-  function initCurved3DCarousel(containerId, stageId, prevBtnId, nextBtnId, dotsWrapId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    const stage = document.getElementById(stageId);
-    const prevBtn = document.getElementById(prevBtnId);
-    const nextBtn = document.getElementById(nextBtnId);
-    const dotsWrap = document.getElementById(dotsWrapId);
-    if (!stage) return;
-
-    const cards = Array.from(stage.children);
-    const total = cards.length;
-    if (total === 0) return;
-
-    let centerIndex = 2; // Default start with 3rd artwork centered so 5 cards are visible
-
-    function getCardStep() {
-      const isMobile = window.innerWidth <= 768;
-      const cardWidth = isMobile ? 165 : 240;
-      const gap = 16;
-      return cardWidth + gap;
-    }
-
-    function buildDots() {
-      if (!dotsWrap) return;
-      dotsWrap.innerHTML = '';
-      for (let i = 0; i < total; i++) {
-        const dot = document.createElement('button');
-        dot.className = `carousel-dot ${i === centerIndex ? 'active' : ''}`;
-        dot.setAttribute('aria-label', `Artwork ${i + 1}`);
-        dot.addEventListener('click', () => {
-          centerIndex = i;
-          render3DArch();
-        });
-        dotsWrap.appendChild(dot);
-      }
-    }
-
-    function updateDots() {
-      if (!dotsWrap) return;
-      const dots = dotsWrap.querySelectorAll('.carousel-dot');
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === centerIndex);
-      });
-    }
-
-    function render3DArch() {
-      const isMobile = window.innerWidth <= 768;
-      const isSmallMobile = window.innerWidth <= 480;
-      const step = getCardStep();
-      const cardWidth = isMobile ? 165 : 240;
-      const viewport = container.querySelector('.curved-carousel-viewport');
-      const viewportWidth = viewport ? viewport.offsetWidth : 1200;
-      const stageCenterX = (viewportWidth / 2) - (cardWidth / 2);
-
-      // Translate stage so active center card is at the center of viewport
-      const targetTranslateX = stageCenterX - (centerIndex * step);
-      stage.style.transform = `translateX(${targetTranslateX}px)`;
-
-      // Apply discrete 3D perspective rotation matching Image 2 & 3
-      cards.forEach((card, idx) => {
-        let dist = idx - centerIndex;
-        if (dist > total / 2) dist -= total;
-        if (dist < -total / 2) dist += total;
-
-        card.classList.remove('slot-far-left', 'slot-mid-left', 'slot-center', 'slot-mid-right', 'slot-far-right');
-
-        if (dist === 0) {
-          card.classList.add('slot-center');
-          card.style.transform = `perspective(1200px) rotateY(0deg) scale(1.0)`;
-          card.style.opacity = '1';
-          card.style.zIndex = '15';
-        } else if (dist === -1) {
-          card.classList.add('slot-mid-left');
-          const angle = isMobile ? 12 : 13;
-          card.style.transform = `perspective(1200px) rotateY(${angle}deg) scale(1.0)`;
-          card.style.opacity = '0.95';
-          card.style.zIndex = '12';
-        } else if (dist === 1) {
-          card.classList.add('slot-mid-right');
-          const angle = isMobile ? -12 : -13;
-          card.style.transform = `perspective(1200px) rotateY(${angle}deg) scale(1.0)`;
-          card.style.opacity = '0.95';
-          card.style.zIndex = '12';
-        } else if (dist === -2) {
-          card.classList.add('slot-far-left');
-          const angle = isMobile ? 22 : 25;
-          card.style.transform = `perspective(1200px) rotateY(${angle}deg) scale(1.0)`;
-          card.style.opacity = isSmallMobile ? '0.35' : '0.95';
-          card.style.zIndex = '10';
-        } else if (dist === 2) {
-          card.classList.add('slot-far-right');
-          const angle = isMobile ? -22 : -25;
-          card.style.transform = `perspective(1200px) rotateY(${angle}deg) scale(1.0)`;
-          card.style.opacity = isSmallMobile ? '0.35' : '0.95';
-          card.style.zIndex = '10';
+        if (shouldShow) {
+          card.classList.remove('pin-hidden');
+          setTimeout(() => {
+            card.classList.add('pin-animating');
+          }, delay);
+          delay += 20;
         } else {
-          // Offscreen cards
-          const sign = dist > 0 ? -1 : 1;
-          card.style.transform = `perspective(1200px) rotateY(${sign * 30}deg) scale(0.9)`;
-          card.style.opacity = '0.12';
-          card.style.zIndex = '1';
+          card.classList.add('pin-hidden');
         }
       });
-
-      updateDots();
     }
 
-    function nextSlide() {
-      centerIndex = (centerIndex + 1) % total;
-      render3DArch();
-    }
-
-    function prevSlide() {
-      centerIndex = (centerIndex - 1 + total) % total;
-      render3DArch();
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        nextSlide();
+    // Filter pill click listeners
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filter = pill.getAttribute('data-filter');
+        applyFilter(filter);
       });
-    }
+    });
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        prevSlide();
+    // Navbar link trigger hooks
+    document.querySelectorAll('[data-filter-trigger]').forEach(navLink => {
+      navLink.addEventListener('click', () => {
+        const targetCategory = navLink.getAttribute('data-filter-trigger');
+        if (targetCategory) {
+          applyFilter(targetCategory);
+        }
       });
+    });
+
+    // Initial default preview: All Art (or hash if deep-linked)
+    let initialCategory = 'all';
+    const initialHash = window.location.hash;
+    if (initialHash === '#digital-art') {
+      initialCategory = 'digital-art';
+    } else if (initialHash === '#traditional-art') {
+      initialCategory = 'traditional-art';
     }
-
-    // Touch / Swipe
-    let touchStartX = 0;
-    container.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-
-    container.addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].clientX;
-      const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 40) {
-        if (diff > 0) nextSlide();
-        else prevSlide();
-      }
-    }, { passive: true });
-
-    window.addEventListener('resize', render3DArch);
-
-    buildDots();
-    render3DArch();
+    applyFilter(initialCategory);
   }
 
-  // Initialize both curved artwork carousels
-  initCurved3DCarousel('digitalCurvedCarousel', 'digitalCurvedStage', 'digitalPrevBtn', 'digitalNextBtn', 'digitalDots');
-  initCurved3DCarousel('tradCurvedCarousel', 'tradCurvedStage', 'tradPrevBtn', 'tradNextBtn', 'tradDots');
+  initPinterestBoard();
 
   // ============================================================
-  // 12. UNIFIED LIGHTBOX SYSTEM (ALL GALLERIES & ARTWORKS)
-  // - Supports tall / full-page mockups with vertical scrolling & readable width
-  // - High-resolution view with zoom, pan, counter, prev/next, touch swipe
+  // 11. UNIFIED LIGHTBOX SYSTEM (WEB APPS & 34 ARTWORKS)
+  // - High-resolution view with zoom controls (in, out, reset, click to zoom)
+  // - Dynamic tall-mode vertical scrolling for full-page UI/UX mockups
+  // - Counter, prev/next navigation, keyboard shortcuts, swipe support
   // ============================================================
   const lightbox = document.getElementById('lightbox');
   if (lightbox) {
@@ -716,13 +698,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxZoomOut = document.getElementById('lightboxZoomOut');
     const lightboxZoomReset = document.getElementById('lightboxZoomReset');
 
-    // Collect unique images for lightbox
+    // Collect all project and pin card images
+    const allGalleryItems = Array.from(document.querySelectorAll('.web-project-card, .pin-card'));
     const uniqueImages = [];
-    document.querySelectorAll('.uniform-carousel-card:not(.is-clone), .curved-carousel-card, .gallery-item').forEach(card => {
+    allGalleryItems.forEach(card => {
       const img = card.querySelector('img');
       if (img && !uniqueImages.includes(img.src)) {
         uniqueImages.push(img.src);
       }
+    });
+
+    // Bind click events on Web Project cards to open Lightbox
+    document.querySelectorAll('.web-project-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.web-project-details-btn')) return;
+        const img = card.querySelector('img');
+        if (img) {
+          const idx = uniqueImages.indexOf(img.src);
+          openLightbox(idx >= 0 ? idx : 0);
+        }
+      });
     });
 
     let currentIndex = 0;
@@ -821,7 +816,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const wrapper = lightbox.querySelector('.lightbox-img-wrapper');
 
         if (ratio > 1.35) {
-          // Tall / Long image (Mockup / Case Study) -> Full width & vertically scrollable without distortion
+          // Tall / Long image (Website case study mockup) -> Full width & vertically scrollable
           lightboxImg.className = 'lightbox-img tall-image';
           lightboxImg.style.width = '100%';
           lightboxImg.style.maxWidth = 'min(92vw, 1000px)';
@@ -836,7 +831,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (wrapper) wrapper.classList.add('tall-mode');
 
           if (lightboxScrollHint) {
-            lightboxScrollHint.innerHTML = '<i class="fas fa-arrows-alt-v"></i> Scroll to view full case study';
+            lightboxScrollHint.innerHTML = 'Scroll to view full case study';
             lightboxScrollHint.style.display = 'block';
           }
         } else {
@@ -854,7 +849,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (wrapper) wrapper.classList.remove('tall-mode');
 
           if (lightboxScrollHint) {
-            lightboxScrollHint.innerHTML = '<i class="fas fa-search-plus"></i> Click or Pinch to Zoom';
+            lightboxScrollHint.innerHTML = 'Click or Pinch to Zoom';
             lightboxScrollHint.style.display = 'block';
           }
         }
@@ -873,8 +868,8 @@ document.addEventListener('DOMContentLoaded', () => {
       updateLightboxImage();
     }
 
-    // Attach click listeners to all cards (including clones)
-    document.querySelectorAll('.uniform-carousel-card, .curved-carousel-card, .gallery-item').forEach(card => {
+    // Attach click listeners to all pin cards (Artworks)
+    document.querySelectorAll('.pin-card').forEach(card => {
       card.addEventListener('click', () => {
         const img = card.querySelector('img');
         if (img) {
@@ -928,15 +923,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // ===== 13. ANTI-PIRACY & ARTWORK PROTECTION =====
+  // ===== 12. ANTI-PIRACY & ARTWORK PROTECTION =====
   document.addEventListener('contextmenu', (e) => {
-    if (e.target.tagName === 'IMG' || e.target.closest('.uniform-carousel-card') || e.target.closest('.curved-carousel-card') || e.target.closest('.gallery-item') || e.target.closest('.lightbox-img')) {
+    if (e.target.tagName === 'IMG' || e.target.closest('.pin-card') || e.target.closest('.lightbox-img')) {
       e.preventDefault();
     }
   });
 
   document.addEventListener('dragstart', (e) => {
-    if (e.target.tagName === 'IMG' || e.target.closest('.uniform-carousel-card') || e.target.closest('.curved-carousel-card') || e.target.closest('.gallery-item')) {
+    if (e.target.tagName === 'IMG' || e.target.closest('.pin-card')) {
       e.preventDefault();
     }
   });

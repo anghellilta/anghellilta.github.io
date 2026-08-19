@@ -7,6 +7,15 @@
   <title>Anghellita — Full-Stack Developer &amp; Designer</title>
   <meta name="description"
     content="Welcome to Anghellita's creative portfolio. Full-Stack Developer, UI/UX Designer, and Project Manager showcasing web apps, digital art, and traditional art.">
+  
+  <!-- Google Fonts: Inter, Montserrat, Nothing You Could Do -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 CDN for all icons (Instagram, LinkedIn, Email, Paper Plane, Star, etc.) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -31,7 +40,7 @@
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
     <a href="#home" class="nav-logo">
-      <img src="title/logo.png" alt="Anghellita Logo">
+      <img src="title/logo.png" alt="Anghellita Logo" class="nav-logo-img">
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
       <span></span><span></span><span></span>
@@ -39,9 +48,9 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#certifications">Certifications</a></li>
       <li><a href="#works">Website &amp; App</a></li>
-      <li><a href="#digital-art">Digital Art</a></li>
-      <li><a href="#traditional-art">Traditional Art</a></li>
+      <li><a href="#artworks">Artworks</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -93,7 +102,7 @@
     <div class="figma-specialist-container">
       <div class="figma-layout-grid">
 
-        <!-- Left Column: Education -->
+        <!-- Left Column: Education & Location -->
         <div class="figma-left-col">
           <div class="figma-edu-block accordion-block" id="accordionEducation">
             <div class="figma-header-wrap">
@@ -185,10 +194,34 @@
           </div>
         </div>
 
-        <!-- Right Column: Toolkit -->
+        <!-- Right Column: Location on Top + Toolkit Below directly aligned to letter 'n' -->
         <div class="figma-right-col">
-          <div class="figma-toolkit-wrap accordion-block" id="accordionToolkit">
-            <div class="figma-header-wrap" style="text-align: right;">
+          
+          <!-- Primary Location Block (Aligned to letter 'n' / right side) -->
+          <div class="figma-location-block accordion-block" id="accordionLocation">
+            <div class="figma-header-wrap right-aligned-header">
+              <h3 class="figma-header-title">Location</h3>
+              <div class="figma-vector-line left">
+                <span class="figma-line"></span>
+                <span class="figma-dot"></span>
+              </div>
+            </div>
+            <div class="accordion-content" id="locationContent">
+              <div class="accordion-inner">
+                <div class="figma-edu-item figma-location-item right-aligned-item" title="Click to view availability details">
+                  <div class="figma-edu-content right-aligned-content">
+                    <div class="figma-edu-school">Plaridel, Bulacan</div>
+                    <div class="figma-edu-strand">Primary Base &bull; Philippines</div>
+                    <div class="figma-edu-honors">Open to Remote / Nearby Relocation</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Toolkit Block (Positioned directly below the letter 'n' of Location) -->
+          <div class="figma-toolkit-wrap accordion-block right-aligned-toolkit" id="accordionToolkit">
+            <div class="figma-header-wrap right-aligned-header">
               <h3 class="figma-header-title">Toolkit</h3>
               <div class="figma-vector-line left">
                 <span class="figma-line"></span>
@@ -197,7 +230,7 @@
             </div>
             <div class="accordion-content" id="toolkitContent">
               <div class="accordion-inner">
-                <img src="asset/Group 14.png" alt="Toolkit — Development & Design Software" class="figma-toolkit-img"
+                <img src="asset/Group 14.png" alt="Toolkit — Development & Design Software" class="figma-toolkit-img right-aligned-img"
                   loading="lazy">
               </div>
             </div>
@@ -208,344 +241,1119 @@
     </div>
   </section>
 
-  <!-- ========== SECTION 1: WEBSITE & APP — UNIFORM SHAPE INFINITE CAROUSEL ========== -->
-  <section class="gallery-carousel-section uniform-section" id="works">
-    <div class="container">
-      <div class="section-title-wrap">
-        <img src="title/website&app.png" alt="Website &amp; App" class="section-title-img" loading="lazy">
-        <p class="section-subtitle">UI/UX case studies and full-stack development projects</p>
-      </div>
-    </div>
-
-    <div class="uniform-carousel-container" id="uniformCarousel">
-      <button class="carousel-nav-arrow carousel-arrow-left" id="uniformPrevBtn" aria-label="Previous Project">‹</button>
-      <div class="uniform-carousel-viewport">
-        <div class="uniform-carousel-track" id="uniformTrack">
-          <!-- Projects with uniform portrait rectangular cards & brand red bottom gradient -->
-          <div class="uniform-carousel-card">
-            <div class="uniform-card-inner">
-              <img src="website&app/Frame 3.png" alt="Website & App — Case Study 1" loading="lazy">
-              <div class="uniform-card-gradient"></div>
-            </div>
-          </div>
-          <div class="uniform-carousel-card">
-            <div class="uniform-card-inner">
-              <img src="website&app/Frame 4.png" alt="Website & App — Case Study 2" loading="lazy">
-              <div class="uniform-card-gradient"></div>
-            </div>
-          </div>
-          <div class="uniform-carousel-card">
-            <div class="uniform-card-inner">
-              <img src="website&app/Frame 5.png" alt="Website & App — Case Study 3" loading="lazy">
-              <div class="uniform-card-gradient"></div>
-            </div>
-          </div>
-          <div class="uniform-carousel-card">
-            <div class="uniform-card-inner">
-              <img src="website&app/Frame 7.png" alt="Website & App — Case Study 4" loading="lazy">
-              <div class="uniform-card-gradient"></div>
-            </div>
-          </div>
-          <div class="uniform-carousel-card">
-            <div class="uniform-card-inner">
-              <img src="website&app/Frame 8.png" alt="Website & App — Case Study 5" loading="lazy">
-              <div class="uniform-card-gradient"></div>
-            </div>
-          </div>
-          <div class="uniform-carousel-card">
-            <div class="uniform-card-inner">
-              <img src="website&app/Frame 9.png" alt="Website & App — Case Study 6" loading="lazy">
-              <div class="uniform-card-gradient"></div>
-            </div>
-          </div>
-          <div class="uniform-carousel-card">
-            <div class="uniform-card-inner">
-              <img src="website&app/frame 11.png" alt="Website & App — Case Study 7" loading="lazy">
-              <div class="uniform-card-gradient"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-nav-arrow carousel-arrow-right" id="uniformNextBtn" aria-label="Next Project">›</button>
-
-      <!-- Dot Indicators -->
-      <div class="carousel-dots-wrap" id="uniformDots"></div>
-    </div>
-  </section>
-
-  <!-- ========== SECTION 2: DIGITAL ART — 3D CURVED SHAPE INFINITE CAROUSEL ========== -->
-  <section class="gallery-carousel-section curved-section" id="digital-art">
-    <div class="container">
-      <div class="section-title-wrap">
-        <img src="title/digitalart.png" alt="Digital Art" class="section-title-img" loading="lazy">
-        <p class="section-subtitle">Digital illustrations, concept designs, and graphic artworks</p>
-      </div>
-    </div>
-
-    <div class="curved-carousel-container" id="digitalCurvedCarousel">
-      <button class="carousel-nav-arrow carousel-arrow-left" id="digitalPrevBtn" aria-label="Previous Artwork">‹</button>
+  <!-- ========== DEDICATED PROFESSIONAL CERTIFICATIONS SECTION (CHRONOLOGICAL RED ACCORDION TIMELINE) ========== -->
+  <section class="certifications-section" id="certifications">
+    <div class="certifications-container">
       
-      <div class="curved-carousel-viewport">
-        <!-- Top & Bottom Arch Ellipse Masks + Side Fades -->
-        <div class="curved-top-arch"></div>
-        <div class="curved-bottom-arch"></div>
-        <div class="curved-fade-left"></div>
-        <div class="curved-fade-right"></div>
+      <!-- Section Header (Centered without square icon) -->
+      <div class="cert-section-header">
+        <h2 class="cert-section-title">Professional Certifications</h2>
+        <p class="cert-section-subtitle">Chronological timeline of verified credentials in AI systems, UI/UX architecture, cloud ERP, and cybersecurity.</p>
+      </div>
 
-        <div class="curved-carousel-stage" id="digitalCurvedStage">
-          <!-- 16 Digital Art Pieces -->
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/FACTOR, ANGEL E. (Infographic).png" alt="Digital Art — Infographic" loading="lazy">
-            </div>
+      <!-- Timeline Vertical Container with Scroll Progress Line -->
+      <div class="cert-timeline" id="certTimeline">
+        <div class="cert-timeline-track">
+          <div class="cert-timeline-progress" id="certTimelineProgress"></div>
+        </div>
+
+        <!-- 1. AI Ready ASEAN Certificate (May 2026) -->
+        <div class="cert-timeline-item active" data-cert="asean-ai">
+          <div class="cert-timeline-node">
+            <i class="fa-solid fa-star"></i>
           </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/751870302_1735036920959253_785918651566794023_n (1).jpg" alt="Digital Art — Artwork 1" loading="lazy">
+          <div class="cert-timeline-card">
+            <div class="cert-card-header">
+              <div class="cert-card-title-group">
+                <span class="cert-date-pill">May 2026</span>
+                <h3 class="cert-card-title">AI Ready ASEAN Certificate</h3>
+                <div class="cert-card-issuer">ASEAN Foundation &bull; AI Readiness &amp; Ethical Development</div>
+              </div>
             </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/752229911_1011409001867900_5575109915300829182_n.jpg" alt="Digital Art — Artwork 2" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/752488455_1561869572015226_242428402772888038_n.jpg" alt="Digital Art — Artwork 3" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/753192496_1030258563036211_7331217399081827104_n.jpg" alt="Digital Art — Artwork 4" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/753237003_1965200430847353_6088212428275406291_n.jpg" alt="Digital Art — Artwork 5" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/753237011_27670069512687367_4427693221872201930_n.jpg" alt="Digital Art — Artwork 6" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/753254827_867528629485807_3372094008049904304_n.jpg" alt="Digital Art — Artwork 7" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/753306083_1735280720837123_4720954455796951123_n.jpg" alt="Digital Art — Artwork 8" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/753336823_1377279753816234_268375224504184215_n (1).jpg" alt="Digital Art — Artwork 9" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/753772703_3004881563196371_3572678782308603577_n.jpg" alt="Digital Art — Artwork 10" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/754201753_1387000220240175_8005960772202071360_n.jpg" alt="Digital Art — Artwork 11" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/754797805_1082796271136167_5611183312485853163_n.jpg" alt="Digital Art — Artwork 12" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/755472241_2726712851055732_3615470246810073949_n.jpg" alt="Digital Art — Artwork 13" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/755689738_1050136520801708_8153825365752690838_n.jpg" alt="Digital Art — Artwork 14" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="digitalart/756219144_1838031737522330_5436934127884413250_n.jpg" alt="Digital Art — Artwork 15" loading="lazy">
+            <div class="cert-card-body">
+              <p class="cert-card-desc">Comprehensive certification in artificial intelligence readiness, ethical AI development, and data-driven workflow automation across modern software ecosystems.</p>
+              <div class="cert-card-competencies">
+                <span class="cert-tag">Generative AI Tools</span>
+                <span class="cert-tag">Prompt Engineering</span>
+                <span class="cert-tag">Data Analytics</span>
+                <span class="cert-tag">Ethical ML</span>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- 2. IBM UI/UX Designer Professional Certificate (January 2026) -->
+        <div class="cert-timeline-item" data-cert="ibm-uiux">
+          <div class="cert-timeline-node">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="cert-timeline-card">
+            <div class="cert-card-header">
+              <div class="cert-card-title-group">
+                <span class="cert-date-pill">January 2026</span>
+                <h3 class="cert-card-title">IBM UI/UX Designer Professional Certificate</h3>
+                <div class="cert-card-issuer">IBM &bull; Product Design &amp; Systems</div>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <p class="cert-card-desc">Professional credential covering user research, design systems, wireframing, high-fidelity interactive prototyping, WCAG accessibility, and responsive digital product architecture in Figma.</p>
+              <div class="cert-card-competencies">
+                <span class="cert-tag">Design Systems</span>
+                <span class="cert-tag">Figma Prototyping</span>
+                <span class="cert-tag">User Research</span>
+                <span class="cert-tag">WCAG Accessibility</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Google Project Management Certificate (January 2026) -->
+        <div class="cert-timeline-item" data-cert="google-pm">
+          <div class="cert-timeline-node">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="cert-timeline-card">
+            <div class="cert-card-header">
+              <div class="cert-card-title-group">
+                <span class="cert-date-pill">January 2026</span>
+                <h3 class="cert-card-title">Google Project Management Certificate</h3>
+                <div class="cert-card-issuer">Google Coursera &bull; Agile &amp; Scrum Lifecycle</div>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <p class="cert-card-desc">In-depth training on Agile, Scrum, and Kanban methodologies, sprint execution, risk mitigation frameworks, project documentation, and cross-functional team coordination.</p>
+              <div class="cert-card-competencies">
+                <span class="cert-tag">Agile &amp; Scrum</span>
+                <span class="cert-tag">Sprint Planning</span>
+                <span class="cert-tag">Risk Management</span>
+                <span class="cert-tag">Stakeholder Comm.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Google Security Risk Management Certificate (December 2025) -->
+        <div class="cert-timeline-item" data-cert="google-sec">
+          <div class="cert-timeline-node">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="cert-timeline-card">
+            <div class="cert-card-header">
+              <div class="cert-card-title-group">
+                <span class="cert-date-pill">December 2025</span>
+                <h3 class="cert-card-title">Google Security Risk Management Certificate</h3>
+                <div class="cert-card-issuer">Google Coursera &bull; Cybersecurity &amp; Network Defense</div>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <p class="cert-card-desc">Validation of key network architecture safety, NIST/ISO risk frameworks, port controls, firewall configurations, vulnerability assessment, and threat mitigation protocols.</p>
+              <div class="cert-card-competencies">
+                <span class="cert-tag">NIST / ISO Frameworks</span>
+                <span class="cert-tag">Network Architecture</span>
+                <span class="cert-tag">Threat Detection</span>
+                <span class="cert-tag">Firewall Config</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Cisco Operating Systems Support Certificate (December 2025) -->
+        <div class="cert-timeline-item" data-cert="cisco-os">
+          <div class="cert-timeline-node">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="cert-timeline-card">
+            <div class="cert-card-header">
+              <div class="cert-card-title-group">
+                <span class="cert-date-pill">December 2025</span>
+                <h3 class="cert-card-title">Cisco Operating Systems Support Certificate</h3>
+                <div class="cert-card-issuer">Cisco &bull; Systems &amp; Network Architecture</div>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <p class="cert-card-desc">Demonstrated mastery of core operating systems architecture, Linux command-line utilities, Windows Server administration, network connectivity, process scheduling, and enterprise systems troubleshooting.</p>
+              <div class="cert-card-competencies">
+                <span class="cert-tag">Linux CLI</span>
+                <span class="cert-tag">Windows Server</span>
+                <span class="cert-tag">Systems Admin</span>
+                <span class="cert-tag">Network Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Connect and Protect: Networks and Network Security (May 2025) -->
+        <div class="cert-timeline-item" data-cert="alison-cyber">
+          <div class="cert-timeline-node">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="cert-timeline-card">
+            <div class="cert-card-header">
+              <div class="cert-card-title-group">
+                <span class="cert-date-pill">May 2025</span>
+                <h3 class="cert-card-title">Connect and Protect: Networks and Network Security</h3>
+                <div class="cert-card-issuer">Alison &bull; Cybersecurity Fundamentals</div>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <p class="cert-card-desc">Fundamentals of network configurations, cybersecurity strategies, cryptography standards, malware defense mechanisms, and access point security audits.</p>
+              <div class="cert-card-competencies">
+                <span class="cert-tag">Network Defense</span>
+                <span class="cert-tag">Access Auditing</span>
+                <span class="cert-tag">Threat Modeling</span>
+                <span class="cert-tag">Cryptography</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. SAP S/4HANA Certificate (December 2024) -->
+        <div class="cert-timeline-item" data-cert="sap-hana">
+          <div class="cert-timeline-node">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="cert-timeline-card">
+            <div class="cert-card-header">
+              <div class="cert-card-title-group">
+                <span class="cert-date-pill">December 2024</span>
+                <h3 class="cert-card-title">SAP S/4HANA Certificate</h3>
+                <div class="cert-card-issuer">SAP &bull; Enterprise ERP Systems</div>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <p class="cert-card-desc">Validation of enterprise resource planning (ERP) workflows, real-time in-memory database management, business transaction integration, and financial/operational analytics in SAP S/4HANA.</p>
+              <div class="cert-card-competencies">
+                <span class="cert-tag">SAP S/4HANA</span>
+                <span class="cert-tag">In-Memory DB</span>
+                <span class="cert-tag">ERP Workflows</span>
+                <span class="cert-tag">Business Modules</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Java Fundamentals (September 2023) -->
+        <div class="cert-timeline-item" data-cert="oracle-java">
+          <div class="cert-timeline-node">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="cert-timeline-card">
+            <div class="cert-card-header">
+              <div class="cert-card-title-group">
+                <span class="cert-date-pill">September 2023</span>
+                <h3 class="cert-card-title">Java Fundamentals</h3>
+                <div class="cert-card-issuer">Oracle &bull; Software Engineering</div>
+              </div>
+            </div>
+            <div class="cert-card-body">
+              <p class="cert-card-desc">Foundational mastery of object-oriented programming (OOP) structures, syntax architectures, loops, arrays, inheritance, interfaces, exception handling, and core algorithmic development in Java SE.</p>
+              <div class="cert-card-competencies">
+                <span class="cert-tag">OOP Paradigms</span>
+                <span class="cert-tag">Java SE</span>
+                <span class="cert-tag">Data Structures</span>
+                <span class="cert-tag">Algorithms</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-
-      <button class="carousel-nav-arrow carousel-arrow-right" id="digitalNextBtn" aria-label="Next Artwork">›</button>
-
-      <!-- Dot Indicators -->
-      <div class="carousel-dots-wrap" id="digitalDots"></div>
     </div>
   </section>
 
-  <!-- ========== SECTION 3: TRADITIONAL ART — 3D CURVED SHAPE INFINITE CAROUSEL ========== -->
-  <section class="gallery-carousel-section curved-section" id="traditional-art">
-    <div class="container">
-      <div class="section-title-wrap">
-        <img src="title/traditionalart.png" alt="Traditional Art" class="section-title-img" loading="lazy">
-        <p class="section-subtitle">Handmade paintings, sketches, and mixed media masterpieces</p>
-      </div>
-    </div>
-
-    <div class="curved-carousel-container" id="tradCurvedCarousel">
-      <button class="carousel-nav-arrow carousel-arrow-left" id="tradPrevBtn" aria-label="Previous Artwork">‹</button>
+  <!-- ========== DEDICATED WEBSITE & APP PROJECTS SECTION (WITH CALLIGRAPHY TITLE) ========== -->
+  <section class="web-app-section" id="works">
+    <div class="web-app-container">
       
-      <div class="curved-carousel-viewport">
-        <!-- Top & Bottom Arch Ellipse Masks + Side Fades -->
-        <div class="curved-top-arch"></div>
-        <div class="curved-bottom-arch"></div>
-        <div class="curved-fade-left"></div>
-        <div class="curved-fade-right"></div>
-
-        <div class="curved-carousel-stage" id="tradCurvedStage">
-          <!-- 18 Traditional Art Pieces -->
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/751764513_1441959014374667_4327550968881304167_n.jpg" alt="Traditional Art — Piece 1" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/751914509_1831805608200136_105801705969479557_n.jpg" alt="Traditional Art — Piece 2" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/752150670_1558454442590209_3316076486176893809_n.jpg" alt="Traditional Art — Piece 3" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/752242279_1354503560165432_2038114877976540059_n.jpg" alt="Traditional Art — Piece 4" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/752609445_2464796010688304_1641880712696899934_n.jpg" alt="Traditional Art — Piece 5" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/752631622_1352262283716077_1458363396510045269_n.jpg" alt="Traditional Art — Piece 6" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/752807199_1338430905169453_1961617185963330959_n.jpg" alt="Traditional Art — Piece 7" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/752838523_1499983828546361_7671563471120601619_n.jpg" alt="Traditional Art — Piece 8" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/752902882_1035068532230661_6081129400786226379_n.jpg" alt="Traditional Art — Piece 9" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/752936753_1360985152677008_8044554602046263815_n.jpg" alt="Traditional Art — Piece 10" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/753032409_1064443835931291_5291489811697651088_n.jpg" alt="Traditional Art — Piece 11" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/753275590_2898313177187659_5130994390996281591_n.jpg" alt="Traditional Art — Piece 12" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/753428793_964238439971250_3890677507165663647_n.jpg" alt="Traditional Art — Piece 13" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/753715716_1064680216241135_5116954670264658646_n.jpg" alt="Traditional Art — Piece 14" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/754015088_1034996722723664_4118619860155196895_n.jpg" alt="Traditional Art — Piece 15" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/755396592_2361821681012907_4470929316692203121_n.jpg" alt="Traditional Art — Piece 16" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/755538544_1979206216092513_8200804385902299453_n.jpg" alt="Traditional Art — Piece 17" loading="lazy">
-            </div>
-          </div>
-          <div class="curved-carousel-card">
-            <div class="curved-card-inner">
-              <img src="tradart/755666915_1189976330869708_3779556249562135535_n.jpg" alt="Traditional Art — Piece 18" loading="lazy">
-            </div>
-          </div>
+      <div class="web-app-header">
+        <div class="calligraphy-title-wrap">
+          <img src="asset/title_website_app.png" alt="Website &amp; App" class="calligraphy-title-img webapp-title-img">
         </div>
+        <p class="pinterest-subtitle">Production-ready responsive platforms, AI mobile capstones, enterprise CRMs, and interactive digital products.</p>
       </div>
 
-      <button class="carousel-nav-arrow carousel-arrow-right" id="tradNextBtn" aria-label="Next Artwork">›</button>
+      <!-- 3-Column Project Cards Grid -->
+      <div class="web-app-grid">
+        
+        <!-- 1. Convinced AI -->
+        <div class="web-project-card" data-project-key="convinced-ai" data-lightbox-src="website&app/frame 11.png">
+          <div class="web-project-thumb-wrap">
+            <img src="website&app/frame 11.png" alt="Convinced AI: B2B Technology &amp; Outsourcing Platform" loading="lazy">
+          </div>
+          <div class="web-project-body">
+            <span class="web-project-category">B2B TECH &amp; OUTSOURCING</span>
+            <h3 class="web-project-title">Convinced AI</h3>
+            <div class="web-project-context">S.P. Madrid &amp; Associates (Internship) &bull; Front-End Developer &amp; UI/UX Designer</div>
+            <p class="web-project-desc">Complete landing page for an IT outsourcing and staff augmentation platform highlighting Philippine-based tech solutions with dark-mode neon aesthetics and high-converting trust metrics.</p>
+            <div class="web-project-tags">
+              <span class="web-tag">Figma</span>
+              <span class="web-tag">React</span>
+              <span class="web-tag">Next.js 14</span>
+              <span class="web-tag">Tailwind CSS</span>
+              <span class="web-tag">Vercel</span>
+            </div>
+            <button class="web-project-details-btn" aria-label="View Convinced AI details">
+              <span>View Case Study</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
 
-      <!-- Dot Indicators -->
-      <div class="carousel-dots-wrap" id="tradDots"></div>
+        <!-- 2. WorkMojo -->
+        <div class="web-project-card" data-project-key="workmojo" data-lightbox-src="website&app/Frame 3.png">
+          <div class="web-project-thumb-wrap">
+            <img src="website&app/Frame 3.png" alt="WorkMojo: Gamified Employee Engagement App" loading="lazy">
+          </div>
+          <div class="web-project-body">
+            <span class="web-project-category">GAMIFIED EMPLOYEE ENGAGEMENT</span>
+            <h3 class="web-project-title">WorkMojo</h3>
+            <div class="web-project-context">S.P. Madrid &amp; Associates (Internship) &bull; UI/UX Designer &amp; Frontend Developer</div>
+            <p class="web-project-desc">An internal application built to boost employee engagement and track performance metrics with achievement badges, progress trackers, leaderboards, and avatar rewards.</p>
+            <div class="web-project-tags">
+              <span class="web-tag">Figma</span>
+              <span class="web-tag">Next.js</span>
+              <span class="web-tag">React</span>
+              <span class="web-tag">Tailwind CSS</span>
+              <span class="web-tag">VS Code</span>
+            </div>
+            <button class="web-project-details-btn" aria-label="View WorkMojo details">
+              <span>View Case Study</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. ChromaSkin -->
+        <div class="web-project-card" data-project-key="chromaskin" data-lightbox-src="website&app/Frame 4.png">
+          <div class="web-project-thumb-wrap">
+            <img src="website&app/Frame 4.png" alt="Chromaskin: AI-Powered Personal Color Analysis" loading="lazy">
+          </div>
+          <div class="web-project-body">
+            <span class="web-project-category">AI-POWERED MOBILE / CAPSTONE</span>
+            <h3 class="web-project-title">ChromaSkin</h3>
+            <div class="web-project-context">College Capstone &bull; Full Stack Developer, UI/UX Designer &amp; Technical Lead</div>
+            <p class="web-project-desc">AI-powered mobile platform making personal color analysis accessible for diverse Philippine complexions using Google ML Kit camera analysis and AR virtual try-on.</p>
+            <div class="web-project-tags">
+              <span class="web-tag">Flutter</span>
+              <span class="web-tag">Dart</span>
+              <span class="web-tag">Supabase</span>
+              <span class="web-tag">Google ML Kit</span>
+              <span class="web-tag">REST APIs</span>
+            </div>
+            <button class="web-project-details-btn" aria-label="View ChromaSkin details">
+              <span>View Case Study</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4. S.P. Madrid Dubai Hub -->
+        <div class="web-project-card" data-project-key="sp-madrid-dubai" data-lightbox-src="website&app/Frame 8.png">
+          <div class="web-project-thumb-wrap">
+            <img src="website&app/Frame 8.png" alt="S.P. Madrid Dubai Hub: Corporate Landing Page" loading="lazy">
+          </div>
+          <div class="web-project-body">
+            <span class="web-project-category">CORPORATE WEB / MIDDLE EAST</span>
+            <h3 class="web-project-title">S.P. Madrid Dubai Hub</h3>
+            <div class="web-project-context">S.P. Madrid &amp; Associates (Internship) &bull; UI/UX Designer &amp; Frontend Developer</div>
+            <p class="web-project-desc">Digital front door for GCC debt recovery solutions featuring authoritative corporate branding, partner logos, Vercel deployment, and multi-language accessibility.</p>
+            <div class="web-project-tags">
+              <span class="web-tag">Figma</span>
+              <span class="web-tag">Next.js</span>
+              <span class="web-tag">Tailwind CSS</span>
+              <span class="web-tag">Vercel</span>
+              <span class="web-tag">Multi-Language</span>
+            </div>
+            <button class="web-project-details-btn" aria-label="View S.P. Madrid Dubai Hub details">
+              <span>View Case Study</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. Lean IT Solutions CRM -->
+        <div class="web-project-card" data-project-key="lean-it" data-lightbox-src="website&app/Frame 7.png">
+          <div class="web-project-thumb-wrap">
+            <img src="website&app/Frame 7.png" alt="Lean IT Solutions: Client-Based CRM System" loading="lazy">
+          </div>
+          <div class="web-project-body">
+            <span class="web-project-category">CLIENT-BASED CRM SYSTEM</span>
+            <h3 class="web-project-title">Lean IT Solutions CRM</h3>
+            <div class="web-project-context">Academic Project (2024) &bull; UI/UX Designer &amp; Frontend Developer</div>
+            <p class="web-project-desc">A clean, modern CRM interface simplifying dense tabular data, multi-step reporting, and analytics dashboards across 5+ modules for frictionless navigation.</p>
+            <div class="web-project-tags">
+              <span class="web-tag">Figma</span>
+              <span class="web-tag">HTML5</span>
+              <span class="web-tag">CSS3</span>
+              <span class="web-tag">JavaScript</span>
+              <span class="web-tag">UI/UX</span>
+            </div>
+            <button class="web-project-details-btn" aria-label="View Lean IT Solutions CRM details">
+              <span>View Case Study</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6. Quizard -->
+        <div class="web-project-card" data-project-key="quizard" data-lightbox-src="website&app/Frame 9.png">
+          <div class="web-project-thumb-wrap">
+            <img src="website&app/Frame 9.png" alt="Quizard: Educational 2D Adventure Game" loading="lazy">
+          </div>
+          <div class="web-project-body">
+            <span class="web-project-category">EDUCATIONAL 2D GAME</span>
+            <h3 class="web-project-title">Quizard</h3>
+            <div class="web-project-context">1st Year College Project &bull; Game UI Designer &amp; Frontend Developer</div>
+            <p class="web-project-desc">An engaging educational 2D trivia game with original Krita character designs, magical UI elements, interactive game HUDs, and Java desktop logic.</p>
+            <div class="web-project-tags">
+              <span class="web-tag">Figma</span>
+              <span class="web-tag">Krita</span>
+              <span class="web-tag">Java</span>
+              <span class="web-tag">NetBeans</span>
+              <span class="web-tag">2D Game UI</span>
+            </div>
+            <button class="web-project-details-btn" aria-label="View Quizard details">
+              <span>View Case Study</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 7. Prismport -->
+        <div class="web-project-card" data-project-key="prismport" data-lightbox-src="website&app/Frame 5.png">
+          <div class="web-project-thumb-wrap">
+            <img src="website&app/Frame 5.png" alt="Prismport: Editorial Art History Platform" loading="lazy">
+          </div>
+          <div class="web-project-body">
+            <span class="web-project-category">EDITORIAL ART HISTORY PLATFORM</span>
+            <h3 class="web-project-title">Prismport</h3>
+            <div class="web-project-context">UI/UX Design Concept &bull; UI/UX Designer</div>
+            <p class="web-project-desc">An immersive editorial web experience celebrating 20 iconic art masters (like Gustave Doré) with classical serif typography, striking red accents, and milestone timelines.</p>
+            <div class="web-project-tags">
+              <span class="web-tag">Figma</span>
+              <span class="web-tag">Editorial UI</span>
+              <span class="web-tag">Typography</span>
+              <span class="web-tag">Art History</span>
+            </div>
+            <button class="web-project-details-btn" aria-label="View Prismport details">
+              <span>View Case Study</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- Footer with Flippable 3D Contact Card -->
+  <!-- ========== PINTEREST-STYLE MASONRY SHOWCASE (CREATIVE ARTWORKS WITH CALLIGRAPHY TITLE) ========== -->
+  <section class="pinterest-section" id="artworks">
+    <!-- Smooth Navigation Anchor Targets -->
+    <div id="digital-art" class="anchor-target"></div>
+    <div id="traditional-art" class="anchor-target"></div>
+
+    <div class="pinterest-container">
+      
+      <!-- Section Header (One Title at a Time) -->
+      <div class="pinterest-header">
+        <div class="calligraphy-title-wrap">
+          <img src="asset/title_digital_art.png" alt="Digital Art" class="calligraphy-title-img art-single-title-img" id="artSingleTitleImg">
+        </div>
+        <p class="pinterest-subtitle">Explore digital concept illustrations, character art, and traditional masterworks in a Pinterest masonry pinboard.</p>
+
+        <!-- Pinterest Category Filter Pills for Artworks -->
+        <div class="pinterest-filter-bar" id="pinterestFilterBar" role="tablist" aria-label="Artworks Category Filter">
+          <button class="filter-pill active" data-filter="all" role="tab" aria-selected="true">
+            <span class="filter-text">All Art</span>
+            <span class="filter-count" id="countAll">34</span>
+          </button>
+          <button class="filter-pill" data-filter="digital-art" role="tab" aria-selected="false">
+            <span class="filter-text">Digital Art</span>
+            <span class="filter-count" id="countDigital">16</span>
+          </button>
+          <button class="filter-pill" data-filter="traditional-art" role="tab" aria-selected="false">
+            <span class="filter-text">Traditional Art</span>
+            <span class="filter-count" id="countTrad">18</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pinterest Dynamic Masonry Grid for 34 Artworks -->
+      <div class="pinterest-grid" id="pinterestGrid">
+
+        <!-- ===== DIGITAL ART PINS (16 ITEMS) ===== -->
+        <!-- 1. Infographic -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/FACTOR, ANGEL E. (Infographic).png" alt="Digital Art — Infographic &amp; Visual Design" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Infographic">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Infographic Systems</h4>
+                <p class="pin-card-desc">Information Architecture &amp; Data Graphics</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Digital Artwork 1 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/751870302_1735036920959253_785918651566794023_n (1).jpg" alt="Digital Art — Illustration I" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 1">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Digital Illustration I</h4>
+                <p class="pin-card-desc">Creative Concept &amp; Lighting Study</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Digital Artwork 2 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/752229911_1011409001867900_5575109915300829182_n.jpg" alt="Digital Art — Character Art II" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 2">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Character Concept II</h4>
+                <p class="pin-card-desc">Digital Painting &amp; Rendering</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Digital Artwork 3 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/752488455_1561869572015226_242428402772888038_n.jpg" alt="Digital Art — Portrait III" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 3">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Portrait Study III</h4>
+                <p class="pin-card-desc">Digital Brushwork &amp; Composition</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. Digital Artwork 4 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/753192496_1030258563036211_7331217399081827104_n.jpg" alt="Digital Art — Concept IV" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 4">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Visual Story IV</h4>
+                <p class="pin-card-desc">Atmospheric Color Palette Study</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. Digital Artwork 5 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/753237003_1965200430847353_6088212428275406291_n.jpg" alt="Digital Art — Artwork V" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 5">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Composition V</h4>
+                <p class="pin-card-desc">Stylized Digital Illustration</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14. Digital Artwork 6 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/753237011_27670069512687367_4427693221872201930_n.jpg" alt="Digital Art — Artwork VI" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 6">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Graphic Rendering VI</h4>
+                <p class="pin-card-desc">Dynamic Graphic Concept</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15. Digital Artwork 7 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/753254827_867528629485807_3372094008049904304_n.jpg" alt="Digital Art — Artwork VII" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 7">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Atmospheric Art VII</h4>
+                <p class="pin-card-desc">Expressive Digital Tones</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16. Digital Artwork 8 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/753306083_1735280720837123_4720954455796951123_n.jpg" alt="Digital Art — Artwork VIII" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 8">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Character Piece VIII</h4>
+                <p class="pin-card-desc">Digital Form &amp; Expression</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 17. Digital Artwork 9 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/753336823_1377279753816234_268375224504184215_n (1).jpg" alt="Digital Art — Artwork IX" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 9">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Stylized Study IX</h4>
+                <p class="pin-card-desc">Creative Visual Painting</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18. Digital Artwork 10 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/753772703_3004881563196371_3572678782308603577_n.jpg" alt="Digital Art — Artwork X" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 10">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Dark Aesthetic Visual X</h4>
+                <p class="pin-card-desc">Moody Contrast &amp; Depth</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 19. Digital Artwork 11 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/754201753_1387000220240175_8005960772202071360_n.jpg" alt="Digital Art — Artwork XI" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 11">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Creative Artwork XI</h4>
+                <p class="pin-card-desc">Digital Illustration &amp; Narrative</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 20. Digital Artwork 12 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/754797805_1082796271136167_5611183312485853163_n.jpg" alt="Digital Art — Artwork XII" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 12">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Digital Sketch XII</h4>
+                <p class="pin-card-desc">Concept Drafting &amp; Lineart</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 21. Digital Artwork 13 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/755472241_2726712851055732_3615470246810073949_n.jpg" alt="Digital Art — Artwork XIII" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 13">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Digital Artwork XIII</h4>
+                <p class="pin-card-desc">Layered Color Rendering</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 22. Digital Artwork 14 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/755689738_1050136520801708_8153825365752690838_n.jpg" alt="Digital Art — Artwork XIV" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 14">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Atmospheric Piece XIV</h4>
+                <p class="pin-card-desc">Environmental &amp; Mood Design</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 23. Digital Artwork 15 -->
+        <div class="pin-card" data-category="digital-art">
+          <div class="pin-media">
+            <img src="digitalart/756219144_1838031737522330_5436934127884413250_n.jpg" alt="Digital Art — Artwork XV" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Digital Art Piece 15">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-digital">Digital Art</span>
+                <h4 class="pin-card-title">Graphic Concept XV</h4>
+                <p class="pin-card-desc">Stylized Digital Character Art</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== TRADITIONAL ART PINS (18 ITEMS) ===== -->
+        <!-- 24. Traditional Art 1 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/751764513_1441959014374667_4327550968881304167_n.jpg" alt="Traditional Art — Painting I" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 1">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Traditional Painting I</h4>
+                <p class="pin-card-desc">Handcrafted Canvas &amp; Pigments</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 25. Traditional Art 2 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/751914509_1831805608200136_105801705969479557_n.jpg" alt="Traditional Art — Charcoal Study II" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 2">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Charcoal Realism II</h4>
+                <p class="pin-card-desc">Graphite &amp; Carbon Tonal Value</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 26. Traditional Art 3 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/752150670_1558454442590209_3316076486176893809_n.jpg" alt="Traditional Art — Fine Art III" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 3">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Fine Art Portrait III</h4>
+                <p class="pin-card-desc">Expressive Traditional Media</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 27. Traditional Art 4 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/752242279_1354503560165432_2038114877976540059_n.jpg" alt="Traditional Art — Piece IV" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 4">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Handmade Canvas IV</h4>
+                <p class="pin-card-desc">Layered Brush Strokes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 28. Traditional Art 5 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/752609445_2464796010688304_1641880712696899934_n.jpg" alt="Traditional Art — Piece V" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 5">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Traditional Sketch V</h4>
+                <p class="pin-card-desc">Anatomy &amp; Contour Drawing</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 29. Traditional Art 6 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/752631622_1352262283716077_1458363396510045269_n.jpg" alt="Traditional Art — Piece VI" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 6">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Ink &amp; Pen Work VI</h4>
+                <p class="pin-card-desc">Cross-Hatching &amp; Stippling</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 30. Traditional Art 7 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/752807199_1338430905169453_1961617185963330959_n.jpg" alt="Traditional Art — Piece VII" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 7">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Acrylic Study VII</h4>
+                <p class="pin-card-desc">Color Harmony on Heavy Paper</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 31. Traditional Art 8 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/752838523_1499983828546361_7671563471120601619_n.jpg" alt="Traditional Art — Piece VIII" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 8">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Handcrafted Piece VIII</h4>
+                <p class="pin-card-desc">Traditional Texture Exploration</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 32. Traditional Art 9 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/752902882_1035068532230661_6081129400786226379_n.jpg" alt="Traditional Art — Piece IX" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 9">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Expressive Sketch IX</h4>
+                <p class="pin-card-desc">Fluid Linework &amp; Shading</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 33. Traditional Art 10 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/752936753_1360985152677008_8044554602046263815_n.jpg" alt="Traditional Art — Piece X" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 10">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Mixed Media Art X</h4>
+                <p class="pin-card-desc">Combined Ink &amp; Acrylic</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 34. Traditional Art 11 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/753032409_1064443835931291_5291489811697651088_n.jpg" alt="Traditional Art — Piece XI" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 11">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Figurative Drawing XI</h4>
+                <p class="pin-card-desc">Human Form &amp; Gestural Flow</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 35. Traditional Art 12 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/753275590_2898313177187659_5130994390996281591_n.jpg" alt="Traditional Art — Piece XII" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 12">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Brushwork Canvas XII</h4>
+                <p class="pin-card-desc">Dynamic Brush Movement</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 36. Traditional Art 13 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/753428793_964238439971250_3890677507165663647_n.jpg" alt="Traditional Art — Piece XIII" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 13">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Fine Art Drawing XIII</h4>
+                <p class="pin-card-desc">Pencil Gradients &amp; Highlights</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 37. Traditional Art 14 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/753715716_1064680216241135_5116954670264658646_n.jpg" alt="Traditional Art — Piece XIV" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 14">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Charcoal Realism XIV</h4>
+                <p class="pin-card-desc">Deep Contrast &amp; Atmospheric Shadow</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 38. Traditional Art 15 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/754015088_1034996722723664_4118619860155196895_n.jpg" alt="Traditional Art — Piece XV" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 15">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Handmade Portrait XV</h4>
+                <p class="pin-card-desc">Traditional Facial Studies</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 39. Traditional Art 16 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/755396592_2361821681012907_4470929316692203121_n.jpg" alt="Traditional Art — Piece XVI" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 16">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Traditional Artpiece XVI</h4>
+                <p class="pin-card-desc">Layered Texture &amp; Form</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 40. Traditional Art 17 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/755538544_1979206216092513_8200804385902299453_n.jpg" alt="Traditional Art — Piece XVII" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 17">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Canvas Painting XVII</h4>
+                <p class="pin-card-desc">Original Handmade Acrylic Canvas</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 41. Traditional Art 18 -->
+        <div class="pin-card" data-category="traditional-art">
+          <div class="pin-media">
+            <img src="tradart/755666915_1189976330869708_3779556249562135535_n.jpg" alt="Traditional Art — Piece XVIII" loading="lazy">
+            <div class="pin-overlay">
+              <button class="pin-view-pill" aria-label="View Traditional Art Piece 18">
+                <span>Preview</span>
+                <span class="pin-view-arrow">↗</span>
+              </button>
+              <div class="pin-meta-info">
+                <span class="pin-category-badge badge-trad">Traditional Art</span>
+                <h4 class="pin-card-title">Mixed Media Masterpiece XVIII</h4>
+                <p class="pin-card-desc">Complex Mixed Media Composition</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer with 3D Flippable Contact Card & Socials -->
   <footer class="footer" id="contact">
-    <div class="footer-image-wrapper">
-      <div class="footer-flip-card" id="footerFlipCard" title="Click to flip contact card">
-        <div class="footer-flip-card-inner">
+    <div class="footer-container">
 
-          <!-- Front Face: asset/8.png -->
-          <div class="footer-card-front">
-            <img src="asset/8.png" alt="Angel Portfolio Artwork" class="footer-card-img" loading="lazy">
-          </div>
+      <!-- 1. Flippable 3D Contact Card -->
+      <div class="footer-image-wrapper">
+        <div class="footer-flip-card" id="footerFlipCard" title="Click to flip contact card">
+          <div class="footer-flip-card-inner">
 
-          <!-- Back Face: asset/contact.png + Download CV Button directly below WORK WITH ME text -->
-          <div class="footer-card-back">
-            <img src="asset/contact.png" alt="Angel Contact Card — angel.e.factor@gmail.com" class="footer-card-img"
-              loading="lazy">
-
-            <!-- Download CV Interactive Button -->
-            <div class="contact-card-overlay">
-              <a href="Angel_Factor_CV.pdf" download="Angel_Factor_CV.pdf" class="contact-card-cv-btn"
-                title="Download Angel Factor's CV">
-                Download My CV
-              </a>
+            <!-- Front Face: asset/8.png -->
+            <div class="footer-card-front">
+              <img src="asset/8.png" alt="Angel Portfolio Artwork" class="footer-card-img" loading="lazy">
             </div>
-          </div>
 
+            <!-- Back Face: asset/contact.png + Download CV Button -->
+            <div class="footer-card-back">
+              <img src="asset/contact.png" alt="Angel Contact Card — angel.e.factor@gmail.com" class="footer-card-img"
+                loading="lazy">
+
+              <!-- Download CV Interactive Button -->
+              <div class="contact-card-overlay">
+                <a href="Angel_Factor_CV.pdf" download="Angel_Factor_CV.pdf" class="contact-card-cv-btn"
+                  title="Download Angel Factor's CV">
+                  Download My CV
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer-contact">
-      <h2 class="footer-contact-title">Let's Connect</h2>
-      <a href="mailto:angel.e.factor@gmail.com" class="footer-email-link">angel.e.factor@gmail.com</a>
-      <div class="footer-socials">
-        <a href="mailto:angel.e.factor@gmail.com" class="footer-social-link" aria-label="Email"
-          title="Email: angel.e.factor@gmail.com">✉</a>
-        <a href="https://www.instagram.com/nglfctr/" target="_blank" rel="noopener" class="footer-social-link"
-          aria-label="Instagram" title="Instagram: @nglfctr">📷</a>
-        <a href="https://www.linkedin.com/in/angelfactor" target="_blank" rel="noopener" class="footer-social-link"
-          aria-label="LinkedIn" title="LinkedIn: Angel Factor">in</a>
+      <!-- 3. Let's Connect Details & High-Visibility Social Links -->
+      <div class="footer-contact">
+        <h2 class="footer-contact-title">Let's Connect</h2>
+        <a href="mailto:angel.e.factor@gmail.com" class="footer-email-link">angel.e.factor@gmail.com</a>
+        <p class="footer-location-text">Plaridel, Bulacan &bull; Open to Remote / Nearby Relocation</p>
+        
+        <!-- Red Logo-Only Social Buttons (Instagram, LinkedIn, Email) -->
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/nglfctr/" target="_blank" rel="noopener" class="footer-social-icon-btn" aria-label="Instagram Profile" title="Instagram: @nglfctr">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/angelfactor" target="_blank" rel="noopener" class="footer-social-icon-btn" aria-label="LinkedIn Profile" title="LinkedIn: Angel Factor">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="mailto:angel.e.factor@gmail.com" class="footer-social-icon-btn" aria-label="Send Direct Email" title="Email: angel.e.factor@gmail.com">
+            <i class="fa-regular fa-envelope"></i>
+          </a>
+        </div>
+        
+        <p class="footer-copyright">&copy; 2026 <a href="#home">Angel</a>. All rights reserved.</p>
       </div>
-      <p class="footer-copyright">&copy; 2026 <a href="#home">Angel</a>. All rights reserved.</p>
+
     </div>
   </footer>
 
@@ -567,7 +1375,7 @@
       <button class="lightbox-zoom-btn" id="lightboxZoomOut" title="Zoom Out">−</button>
       <button class="lightbox-zoom-btn" id="lightboxZoomReset" title="Reset Zoom">↺</button>
     </div>
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
     <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">‹</button>
     <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">›</button>
     <div class="lightbox-content" id="lightboxContent">
@@ -576,7 +1384,7 @@
       </div>
     </div>
     <span class="lightbox-counter" id="lightboxCounter"></span>
-    <span class="lightbox-scroll-hint" id="lightboxScrollHint" style="display:none;">🔍 Click or Pinch to Zoom</span>
+    <span class="lightbox-scroll-hint" id="lightboxScrollHint" style="display:none;">Click or Pinch to Zoom</span>
   </div>
 
   <script src="script.js"></script>
