@@ -7,15 +7,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;600;700;800&family=Nothing+You+Could+Do&display=swap');
 
 /* ===== CUSTOM PROPERTIES ===== */
-/* ===== CUSTOM PROPERTIES (WARM BURGUNDY & CRIMSON PALETTE) ===== */
+/* ===== CUSTOM PROPERTIES (EXACT SECTION SHADES) ===== */
 :root {
-  /* Warm Dark & Crimson Palette (Derived from user palette: #730c1e, #210207, #480415, #140f17) */
-  --bg-primary: #210207;
-  --bg-secondary: #2a060e;
-  --bg-section-alt: #26040a;
-  --bg-footer: #140f17;
-  --bg-card: #350711;
-  --bg-card-hover: #480415;
+  /* Exact section background shades matching user reference specifications */
+  --bg-primary: #1A1A1A;       /* Image 3 reference: #1A1A1A (Explore & Footer) */
+  --bg-secondary: #1E1D1D;     /* Image 2 reference: #1E1D1D (Artworks & Projects) */
+  --bg-section-alt: #312F2F;   /* Image 1 reference: #312F2F (Education & Toolkit) */
+  --bg-certifications: #262424;/* Seamless transition between #312F2F and #1E1D1D */
+  --bg-footer: #1A1A1A;        /* Matches #1A1A1A */
+  --bg-card: #272525;          /* Warm elevated dark surface */
+  --bg-card-hover: #353232;    /* Warm hover state */
   --primary: #730c1e;
   --primary-light: #a81c30;
   --primary-glow: rgba(115, 12, 30, 0.45);
@@ -27,10 +28,10 @@
   --text-muted: #a68d93;
   --border: rgba(248, 239, 241, 0.1);
   --border-light: rgba(248, 239, 241, 0.16);
-  --nav-bg: rgba(33, 2, 7, 0.88);
-  --nav-scrolled: rgba(20, 15, 23, 0.96);
-  --shadow: 0 8px 32px rgba(20, 15, 23, 0.65);
-  --shadow-sm: 0 4px 16px rgba(20, 15, 23, 0.45);
+  --nav-bg: rgba(26, 26, 26, 0.88);
+  --nav-scrolled: rgba(20, 20, 20, 0.96);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.45);
   --shadow-glow: 0 0 40px rgba(115, 12, 30, 0.35);
 
   /* Typography */
@@ -598,7 +599,7 @@ ul {
 /* ===== SECOND SECTION WITH POP-UP INTERACTION ===== */
 .specialist-section {
   padding: 90px 0 110px;
-  background: var(--bg-primary);
+  background: var(--bg-section-alt);
   position: relative;
   z-index: 2;
   border-bottom: 1px solid var(--border);
@@ -1148,7 +1149,7 @@ ul {
 /* ===== DEDICATED PROFESSIONAL CERTIFICATIONS SECTION (CHRONOLOGICAL RED ACCORDION TIMELINE) ===== */
 .certifications-section {
   padding: 95px 0 85px;
-  background: var(--bg-section-alt);
+  background: var(--bg-certifications);
   position: relative;
   z-index: 2;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -1375,7 +1376,7 @@ ul {
 /* ===== DEDICATED WEBSITE & APP SECTION (IMAGE 2 CARDS) ===== */
 .web-app-section {
   padding: 95px 0 85px;
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   position: relative;
   z-index: 2;
   border-top: 1px solid var(--border);
